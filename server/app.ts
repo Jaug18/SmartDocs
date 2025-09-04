@@ -20,7 +20,11 @@ const app = express();
 // Configurar CORS
 app.use(cors({
   origin: [
-    'http://localhost:8001' // Puerto del frontend Vite
+    'http://localhost:8001', // Puerto del frontend Vite local
+    'http://localhost:3000', // Puerto alternativo para desarrollo
+    'https://smartdocs1.netlify.app', // Frontend en Netlify
+    'https://*.netlify.app', // Cualquier subdominio de Netlify
+    'https://*.vercel.app' // Por si usas Vercel en el futuro
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
