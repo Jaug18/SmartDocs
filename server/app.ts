@@ -18,20 +18,14 @@ import aiRoutes from './routes/AIGPT41Nano';
 const app = express();
 
 // Configurar CORS
-const allowedOrigins = process.env.NODE_ENV === 'production' 
-  ? [
-      'https://smartdocs.vercel.app',
-      'https://smartdocs-preview.vercel.app',
-      process.env.FRONTEND_URL
-    ].filter(Boolean) as string[]
-  : ['http://localhost:8001'];
-
 app.use(cors({
-  origin: allowedOrigins,
+  origin: [
+    'http://localhost:8001' // Puerto del frontend Vite
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  exposedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Content-Type', 'Authorization'], // <-- Asegura que los headers estén expuestos
   preflightContinue: false,
   optionsSuccessStatus: 204
 }));
