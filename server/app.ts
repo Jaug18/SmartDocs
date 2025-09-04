@@ -19,17 +19,36 @@ const app = express();
 
 // Configurar CORS
 app.use(cors({
-  origin: [
-    'http://localhost:8001', // Puerto del frontend Vite local
-    'http://localhost:3000', // Puerto alternativo para desarrollo
-    'https://smartdocs1.netlify.app', // Frontend en Netlify
-    'https://*.netlify.app', // Cualquier subdominio de Netlify
-    'https://*.vercel.app' // Por si usas Vercel en el futuro
-  ],
+  origin: function (origin, callback) {
+    // Permitir requests sin origin (mobile apps, etc.)
+    if (!origin) return callback(null, true);
+    
+    // Lista de orígenes permitidos
+    const allowedOrigins = [
+      'http://localhost:8001',
+      'http://localhost:3000',
+      'http://localhost:5173',
+      'https://smartdocs1.netlify.app'
+    ];
+    
+    // Verificar si el origin está en la lista o es un dominio de Netlify/Vercel
+    if (allowedOrigins.includes(origin) || 
+        origin.endsWith('.netlify.app') || 
+        origin.endsWith('.vercel.app')) {
+      return callback(null, true);
+    }
+    
+    // En desarrollo, permitir todos los localhost
+    if (process.env.NODE_ENV === 'development' && origin.startsWith('http://localhost:')) {
+      return callback(null, true);
+    }
+    
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  exposedHeaders: ['Content-Type', 'Authorization'], // <-- Asegura que los headers estén expuestos
+  exposedHeaders: ['Content-Type', 'Authorization'],
   preflightContinue: false,
   optionsSuccessStatus: 204
 }));
