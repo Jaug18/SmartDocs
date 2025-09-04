@@ -61,6 +61,7 @@ app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
 // Middleware específico para uploads con CORS más permisivo
 app.use('/uploads', (req, res, next) => {
+  console.log(`📁 Uploads request: ${req.method} ${req.url}`);
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -71,6 +72,7 @@ app.use('/uploads', (req, res, next) => {
 // Servir archivos estáticos para las imágenes subidas
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
   setHeaders: (res, filePath) => {
+    console.log(`🖼️ Serving static file: ${filePath}`);
     // Configurar headers CORS para archivos estáticos
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET');
@@ -140,6 +142,32 @@ app.use('/api/AIGPT41Nano', aiRoutes);
 // Ruta de salud
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+// Endpoint para debuggear archivos uploads
+app.get('/debug/uploads', (req, res) => {
+  import('fs').then(fs => {
+    const uploadsPath = path.join(__dirname, 'uploads');
+    const profilesPath = path.join(uploadsPath, 'profiles');
+    
+    try {
+      const uploadsExists = fs.existsSync(uploadsPath);
+      const profilesExists = fs.existsSync(profilesPath);
+      
+      const profileFiles = profilesExists ? fs.readdirSync(profilesPath) : [];
+      
+      res.json({
+        uploadsPath,
+        profilesPath,
+        uploadsExists,
+        profilesExists,
+        profileFiles,
+        __dirname
+      });
+    } catch (error) {
+      res.status(500).json({ error: (error as Error).message });
+    }
+  });
 });
 
 // Manejo de rutas no encontradas
