@@ -5,11 +5,15 @@
   "main": "index.ts",
   "scripts": {
     "dev": "nodemon --exec ts-node index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js",
+    "build": "tsc && npx prisma generate",
+    "start": "npx prisma migrate deploy && node dist/index.js",
+    "postinstall": "npx prisma generate",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:studio": "prisma studio"
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "prisma:studio": "prisma studio",
+    "railway:build": "npm run build",
+    "railway:start": "npm run start"
   },
   "dependencies": {
     "@prisma/client": "^6.10.0",
