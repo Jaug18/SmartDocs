@@ -17,21 +17,33 @@ import aiRoutes from './routes/AIGPT41Nano';
 // Crear aplicación Express
 const app = express();
 
-// Configurar CORS - Configuración simplificada y robusta
-app.use(cors({
-  origin: [
+// Configurar CORS - Configuración permisiva para debugging
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  const allowedOrigins = [
     'http://localhost:8001',
     'http://localhost:3000', 
     'http://localhost:5173',
     'https://smartdocs1.netlify.app'
-  ],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
-  exposedHeaders: ['Content-Type', 'Authorization'],
-  preflightContinue: false,
-  optionsSuccessStatus: 204
-}));
+  ];
+
+  // Si no hay origin o está en la lista permitida
+  if (!origin || allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin || '*');
+  }
+
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS,PATCH');
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-Requested-With,Accept,Origin');
+  res.header('Access-Control-Expose-Headers', 'Content-Type,Authorization');
+
+  // Responder immediatamente a preflight requests
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+
+  next();
+});
 
 // Middleware para webhooks (debe ir ANTES del express.json())
 // app.use('/api/webhooks', express.raw({ type: 'application/json' })); // Temporalmente deshabilitado
@@ -46,9 +58,6 @@ app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
-
-// Handler explícito para OPTIONS (preflight)
-app.options('*', cors());
 
 // Middleware específico para uploads con CORS más permisivo
 app.use('/uploads', (req, res, next) => {
