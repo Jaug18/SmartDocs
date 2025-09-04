@@ -76,7 +76,7 @@ app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
 // Middleware específico para uploads con CORS más permisivo
 app.use('/uploads', (req, res, next) => {
-  console.log(`📁 Uploads request: ${req.method} ${req.url}`);
+  console.log(`📁 Uploads middleware: ${req.method} ${req.url} (originalUrl: ${req.originalUrl})`);
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -87,7 +87,7 @@ app.use('/uploads', (req, res, next) => {
 // Servir archivos estáticos para las imágenes subidas
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
   setHeaders: (res, filePath) => {
-    console.log(`🖼️ Serving static file: ${filePath}`);
+    console.log(`🖼️ Express.static serving: ${filePath}`);
     // Configurar headers CORS para archivos estáticos
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET');
@@ -101,6 +101,12 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
     }
   }
 }));
+
+// Middleware adicional para debuggear si la petición llega aquí
+app.use('/uploads', (req, res, next) => {
+  console.log(`⚠️ Uploads request NOT handled by static middleware: ${req.method} ${req.url}`);
+  res.status(404).json({ error: 'File not found in uploads', path: req.url });
+});
 
 // Ruta raíz - Añadida para evitar el error 404
 app.get('/', (req, res) => {
@@ -182,6 +188,20 @@ app.get('/debug/uploads', (req, res) => {
     } catch (error) {
       res.status(500).json({ error: (error as Error).message });
     }
+  });
+});
+
+// Endpoint para debuggear rutas del servicio
+app.get('/debug/service-paths', (req, res) => {
+  // Simular las rutas que usaría el servicio
+  const serviceDirname = path.join(__dirname); // En services sería __dirname = /path/to/services
+  const serviceUploadDir = path.resolve(serviceDirname, '..', 'uploads', 'profiles');
+  
+  res.json({
+    serviceDirname,
+    serviceUploadDir,
+    appDirname: __dirname,
+    staticPath: path.join(__dirname, 'uploads')
   });
 });
 

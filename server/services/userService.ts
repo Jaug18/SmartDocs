@@ -111,9 +111,16 @@ export const userService = {
       const extension = file.originalname.split('.').pop();
       const filename = `profile_${userId}_${timestamp}.${extension}`;
       
-      // Ruta donde guardar el archivo - usar ruta absoluta desde la raíz del proyecto
-      const uploadDir = path.join(process.cwd(), 'uploads', 'profiles');
+      // Ruta donde guardar el archivo - usar la misma ruta que el middleware de archivos estáticos
+      // En desarrollo: __dirname = /Users/.../server/services
+      // En producción: __dirname = /opt/render/project/src/server/dist
+      const uploadDir = path.resolve(__dirname, '..', 'uploads', 'profiles');
       const filePath = path.join(uploadDir, filename);
+      
+      // Debug logging
+      logger.info(`📁 Upload debug: __dirname=${__dirname}`);
+      logger.info(`📁 Upload debug: uploadDir=${uploadDir}`);
+      logger.info(`📁 Upload debug: filePath=${filePath}`);
       
       // Asegurar que el directorio existe
       await fs.mkdir(uploadDir, { recursive: true });
