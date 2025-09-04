@@ -18,10 +18,15 @@ import aiRoutes from './routes/AIGPT41Nano';
 const app = express();
 
 // Configurar CORS
-app.use(cors({
-  origin: function (origin, callback) {
-    // Permitir requests sin origin (mobile apps, etc.)
-    if (!origin) return callback(null, true);
+const corsOptions = {
+  origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
+    // Permitir requests sin origin (mobile apps, Postman, etc.)
+    if (!origin) {
+      console.log('Request without origin - allowing');
+      return callback(null, true);
+    }
+    
+    console.log('CORS check for origin:', origin);
     
     // Lista de orígenes permitidos
     const allowedOrigins = [
@@ -31,27 +36,36 @@ app.use(cors({
       'https://smartdocs1.netlify.app'
     ];
     
-    // Verificar si el origin está en la lista o es un dominio de Netlify/Vercel
-    if (allowedOrigins.includes(origin) || 
-        origin.endsWith('.netlify.app') || 
-        origin.endsWith('.vercel.app')) {
+    // Verificar si el origin está en la lista exacta
+    if (allowedOrigins.includes(origin)) {
+      console.log('Origin allowed from list:', origin);
+      return callback(null, true);
+    }
+    
+    // Verificar dominios de Netlify y Vercel
+    if (origin.endsWith('.netlify.app') || origin.endsWith('.vercel.app')) {
+      console.log('Origin allowed from hosting platform:', origin);
       return callback(null, true);
     }
     
     // En desarrollo, permitir todos los localhost
     if (process.env.NODE_ENV === 'development' && origin.startsWith('http://localhost:')) {
+      console.log('Origin allowed in development:', origin);
       return callback(null, true);
     }
     
-    return callback(new Error('Not allowed by CORS'));
+    console.log('Origin NOT allowed:', origin);
+    return callback(null, false); // Cambiar a false en lugar de Error
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
   exposedHeaders: ['Content-Type', 'Authorization'],
   preflightContinue: false,
   optionsSuccessStatus: 204
-}));
+};
+
+app.use(cors(corsOptions));
 
 // Middleware para webhooks (debe ir ANTES del express.json())
 // app.use('/api/webhooks', express.raw({ type: 'application/json' })); // Temporalmente deshabilitado
