@@ -1,0 +1,105 @@
+/* FileHandler Button Styles */
+.file-handler-button {
+  position: relative;
+  height: 1.75rem;
+  width: 1.75rem;
+  padding: 0;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+}
+
+.file-handler-button:hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--primary));
+  transform: scale(1.05);
+}
+
+.file-handler-button:active {
+  transform: scale(0.95);
+}
+
+/* Visual feedback for drag and drop */
+.file-handler-drag-over {
+  border: 2px dashed hsl(var(--primary));
+  background-color: hsl(var(--primary) / 0.1);
+  border-radius: 0.5rem;
+}
+
+.file-handler-drag-over::after {
+  content: 'Suelta las imágenes aquí';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: hsl(var(--background));
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+}
+
+/* Dark mode support */
+.dark .file-handler-button {
+  border-color: hsl(var(--border));
+}
+
+.dark .file-handler-button:hover {
+  background-color: hsl(var(--accent));
+  border-color: hsl(var(--primary));
+}
+
+/* Animation for file upload feedback */
+@keyframes fileUploadPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+.file-handler-uploading {
+  animation: fileUploadPulse 1s ease-in-out infinite;
+}
+
+/* Improved file drop zone styling */
+.editor-content-container.file-drop-active {
+  position: relative;
+  border: 2px dashed hsl(var(--primary));
+  background-color: hsl(var(--primary) / 0.05);
+  border-radius: 0.5rem;
+}
+
+.editor-content-container.file-drop-active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: hsl(var(--primary) / 0.1);
+  border-radius: 0.5rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* File handler specific tooltip styling */
+.file-handler-tooltip {
+  max-width: 200px;
+  text-align: center;
+}
+
+.file-handler-tooltip .tooltip-title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.file-handler-tooltip .tooltip-description {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  line-height: 1.2;
+}

@@ -1,0 +1,45 @@
+/* Text Align Button Styles */
+.text-align-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.text-align-button:hover {
+  background-color: hsl(var(--muted));
+}
+
+.text-align-button.bg-muted {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Text alignment classes for the editor content */
+.ProseMirror [style*="text-align: left"] {
+  text-align: left !important;
+}
+
+.ProseMirror [style*="text-align: center"] {
+  text-align: center !important;
+}
+
+.ProseMirror [style*="text-align: right"] {
+  text-align: right !important;
+}
+
+.ProseMirror [style*="text-align: justify"] {
+  text-align: justify !important;
+}
+
+/* Dropdown menu item hover effects */
+.text-align-dropdown-item {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.text-align-dropdown-item:hover {
+  background-color: hsl(var(--accent));
+}
+
+.text-align-dropdown-item.active {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}

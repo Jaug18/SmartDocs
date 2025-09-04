@@ -1,0 +1,152 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+/generated/prisma
+
+# Environment variables - Asegurar todas las variantes
+.env
+.env.*
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+.env.staging
+
+# Archivos específicos de entorno que no deben subirse
+.env.local
+server/.env
+server/.env.local
+server/.env.development
+server/.env.production
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+server/prisma/dev.db*
+server/prisma/migrations/
+
+# API keys and secrets
+.secrets
+secrets.json
+config/secrets.js
+
+# User data and uploads
+uploads/
+user-data/
+documents/
+temp/
+
+# Build artifacts
+build/
+out/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# Operating System Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.Spotlight-V100
+.Trashes
+.fseventsd
+.DocumentRevisions-V100
+.TemporaryItems
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Personal notes and documentation
+PERSONAL_NOTES.md
+TODO_PRIVATE.md
+CREDENTIALS.md
+
+# Backup files
+*.backup
+*.bak
+*.swp
+*.swo
+*~
+
+# Package manager lockfiles (opcional, dependiendo de tu preferencia)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml

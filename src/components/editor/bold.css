@@ -1,0 +1,102 @@
+/* BoldButton Component Styles */
+.bold-button,
+.bold-toggle {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.bold-button:hover:not(:disabled),
+.bold-toggle:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+/* Active state for toggle */
+.bold-toggle--active,
+.bold-toggle[data-state="on"] {
+  @apply bg-accent text-accent-foreground;
+  @apply font-bold;
+}
+
+/* Active state for button */
+.bold-button.bg-accent {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  @apply font-bold;
+}
+
+/* Tooltip Styles */
+.bold-tooltip {
+  @apply text-center;
+}
+
+.bold-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.bold-tooltip__shortcut {
+  @apply text-xs text-muted-foreground;
+}
+
+.bold-tooltip kbd {
+  @apply inline-flex items-center justify-center rounded border border-border bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .bold-button,
+  .bold-toggle {
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+/* Enhanced Bold text styles for TipTap editor */
+.tiptap strong,
+.tiptap b {
+  font-weight: 700;
+  @apply transition-all duration-150;
+}
+
+.tiptap strong:hover,
+.tiptap b:hover {
+  @apply text-primary;
+}
+
+/* Dark mode enhancements */
+.dark .bold-button,
+.dark .bold-toggle {
+  @apply hover:bg-gray-800;
+}
+
+/* Accessibility improvements */
+.bold-button:focus-visible,
+.bold-toggle:focus-visible {
+  @apply ring-2 ring-blue-500/50 ring-offset-2;
+}
+
+/* Animation for bold text application */
+@keyframes bold-apply {
+  0% {
+    font-weight: normal;
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    font-weight: 700;
+    transform: scale(1);
+  }
+}
+
+.tiptap strong.new-bold,
+.tiptap b.new-bold {
+  animation: bold-apply 0.2s ease-out forwards;
+}

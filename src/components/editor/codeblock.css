@@ -1,0 +1,185 @@
+/* CodeBlock styles for TipTap editor */
+.tiptap :first-child {
+  margin-top: 0;
+}
+
+.tiptap pre {
+  background: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  color: hsl(var(--foreground));
+  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+  margin: 1.5rem 0;
+  padding: 0.75rem 1rem;
+  position: relative;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+.tiptap pre code {
+  background: none;
+  color: inherit;
+  font-size: 0.875rem;
+  padding: 0;
+  border-radius: 0;
+  white-space: pre;
+  display: block;
+}
+
+/* Language indicator */
+.tiptap pre[data-language]::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .tiptap pre {
+    background: hsl(220 13% 18%);
+    border-color: hsl(220 13% 28%);
+    color: hsl(220 14% 96%);
+  }
+  
+  .tiptap pre[data-language]::before {
+    color: hsl(220 14% 71%);
+  }
+}
+
+/* Syntax highlighting classes (basic) */
+.tiptap pre .token.comment,
+.tiptap pre .token.prolog,
+.tiptap pre .token.doctype,
+.tiptap pre .token.cdata {
+  color: hsl(var(--muted-foreground));
+  font-style: italic;
+}
+
+.tiptap pre .token.punctuation {
+  color: hsl(var(--foreground));
+}
+
+.tiptap pre .token.property,
+.tiptap pre .token.tag,
+.tiptap pre .token.boolean,
+.tiptap pre .token.number,
+.tiptap pre .token.constant,
+.tiptap pre .token.symbol,
+.tiptap pre .token.deleted {
+  color: hsl(var(--destructive));
+}
+
+.tiptap pre .token.selector,
+.tiptap pre .token.attr-name,
+.tiptap pre .token.string,
+.tiptap pre .token.char,
+.tiptap pre .token.builtin,
+.tiptap pre .token.inserted {
+  color: hsl(120 100% 25%);
+}
+
+.tiptap pre .token.operator,
+.tiptap pre .token.entity,
+.tiptap pre .token.url,
+.tiptap pre .token.variable {
+  color: hsl(var(--primary));
+}
+
+.tiptap pre .token.atrule,
+.tiptap pre .token.attr-value,
+.tiptap pre .token.function,
+.tiptap pre .token.class-name {
+  color: hsl(240 100% 50%);
+}
+
+.tiptap pre .token.keyword {
+  color: hsl(300 100% 25%);
+  font-weight: 600;
+}
+
+.tiptap pre .token.regex,
+.tiptap pre .token.important {
+  color: hsl(30 100% 40%);
+}
+
+.tiptap pre .token.important,
+.tiptap pre .token.bold {
+  font-weight: bold;
+}
+
+.tiptap pre .token.italic {
+  font-style: italic;
+}
+
+/* Focus styles */
+.tiptap pre:focus-within {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Copy button styles */
+.tiptap pre:hover::after {
+  content: 'Copy';
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.tiptap pre[data-language]:hover::after {
+  top: 2rem;
+}
+
+.tiptap pre:hover::after:hover {
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tiptap pre {
+    margin: 1rem 0;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  
+  .tiptap pre code {
+    font-size: 0.8rem;
+  }
+  
+  .tiptap pre[data-language]::before {
+    font-size: 0.7rem;
+    top: 0.25rem;
+    right: 0.5rem;
+  }
+}
+
+/* Scrollbar styling for code blocks */
+.tiptap pre::-webkit-scrollbar {
+  height: 6px;
+}
+
+.tiptap pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tiptap pre::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+
+.tiptap pre::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}

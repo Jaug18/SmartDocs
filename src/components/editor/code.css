@@ -1,0 +1,121 @@
+/* CodeButton Component Styles */
+.code-button,
+.code-toggle {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.code-button:hover:not(:disabled),
+.code-toggle:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+/* Active state for toggle */
+.code-toggle--active,
+.code-toggle[data-state="on"] {
+  @apply bg-accent text-accent-foreground;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* Active state for button */
+.code-button.bg-accent {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* Tooltip Styles */
+.code-tooltip {
+  @apply text-center;
+}
+
+.code-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.code-tooltip__shortcut {
+  @apply text-xs text-muted-foreground;
+}
+
+.code-tooltip kbd {
+  @apply inline-flex items-center justify-center rounded border border-border bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .code-button,
+  .code-toggle {
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+/* Enhanced Code text styles for TipTap editor */
+.tiptap code {
+  @apply bg-gray-100 dark:bg-gray-800;
+  @apply text-green-600 dark:text-green-400;
+  @apply px-1.5 py-0.5 rounded;
+  @apply transition-all duration-150;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.875em;
+  font-weight: 500;
+  border: 1px solid hsl(var(--border));
+}
+
+.tiptap code:hover {
+  @apply bg-gray-200 dark:bg-gray-700;
+  @apply text-green-700 dark:text-green-300;
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+.tiptap code:focus {
+  @apply outline-2 outline-green-500/50 outline-offset-1;
+}
+
+/* Dark mode enhancements */
+.dark .code-button,
+.dark .code-toggle {
+  @apply hover:bg-gray-800;
+}
+
+/* Accessibility improvements */
+.code-button:focus-visible,
+.code-toggle:focus-visible {
+  @apply ring-2 ring-green-500/50 ring-offset-2;
+}
+
+/* Animation for code text application */
+@keyframes code-apply {
+  0% {
+    background-color: transparent;
+    transform: scale(1);
+    font-family: inherit;
+  }
+  50% {
+    transform: scale(1.05);
+    background-color: hsl(var(--accent) / 0.3);
+  }
+  100% {
+    background-color: hsl(var(--muted));
+    transform: scale(1);
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+}
+
+.tiptap code.new-code {
+  animation: code-apply 0.3s ease-out forwards;
+}
+
+/* Code syntax highlighting compatibility */
+.tiptap code.hljs {
+  background: transparent !important;
+  padding: 0 !important;
+}

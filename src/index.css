@@ -1,0 +1,1109 @@
+/* Importar componentes de editor */
+
+@import './components/editor/draghandle.css';
+@import './components/editor/color.css';
+@import './components/editor/filehandler.css';
+@import './components/editor/focus.css';
+@import './components/editor/fontfamily.css';
+@import './components/editor/invisiblecharacters.css';
+@import './components/editor/mathematics.css';
+@import './components/editor/placeholder.css';
+@import './components/editor/tableofcontents.css';
+@import './components/editor/textalign.css';
+@import './components/editor/typography.css';
+@import './components/editor/history.css';
+@import './components/editor/toolbar.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 265.1 89.3% 70%; /* Color primario tipo Material Design */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 265.1 89.3% 70%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 265.1 89.3% 70%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 265.1 89.3% 70%;
+  }
+
+  .dark {
+    --background: 222 18% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 18% 12%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 18% 12%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 263 85% 75%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 20%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 75%;
+
+    --accent: 217.2 32.6% 20%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 40%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 22%;
+    --input: 217.2 32.6% 22%;
+    --ring: 263 85% 75%;
+    
+    --sidebar-background: 222 22% 14%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 263 85% 75%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 22% 18%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 222 22% 20%;
+    --sidebar-ring: 263 85% 75%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Microanimaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Animación para feedback visual */
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(5px); }
+  15% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-5px); }
+}
+
+/* Clases de animación */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.2s ease-out forwards;
+}
+
+.animate-pulse-once {
+  animation: pulse 0.4s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+/* Animación mejorada para el menú burbuja */
+@keyframes bubbleShow {
+  from { 
+    transform: scale(0.95) translateY(5px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: scale(1) translateY(0); 
+    opacity: 1; 
+  }
+}
+
+.animate-bubble-show {
+  animation: bubbleShow 0.15s ease-out forwards;
+}
+
+/* Animación para nueva carpeta creada */
+@keyframes newFolderCreate {
+  0% { 
+    opacity: 0; 
+    transform: translateX(-10px) scale(0.95); 
+    background-color: hsla(var(--primary), 0.1);
+  }
+  50% {
+    background-color: hsla(var(--primary), 0.15);
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateX(0) scale(1); 
+    background-color: transparent;
+  }
+}
+
+.animate-new-folder {
+  animation: newFolderCreate 0.4s ease-out forwards;
+}
+
+/* Highlight para carpeta en edición */
+.folder-editing {
+  background-color: hsla(var(--primary), 0.08);
+  border-radius: 0.375rem;
+  box-shadow: 0 0 0 2px hsla(var(--primary), 0.3);
+}
+
+/* Animación para entrada de input */
+@keyframes inputFocus {
+  from { 
+    box-shadow: 0 0 0 0 hsla(var(--primary), 0.5);
+  }
+  to { 
+    box-shadow: 0 0 0 2px hsla(var(--primary), 0.3);
+  }
+}
+
+.input-new-folder {
+  animation: inputFocus 0.2s ease-out;
+}
+
+/* Indicador pulsante para nuevos usuarios en el menú */
+.pulse-hint {
+  position: relative;
+}
+
+.pulse-hint::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: hsl(var(--primary));
+  animation: pulse 2s infinite;
+}
+
+/* Mejora de arrastrar y soltar - indicadores visuales */
+.ProseMirror .dragging-active {
+  background-color: hsla(var(--primary), 0.1);
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease;
+}
+
+.ProseMirror .drop-target {
+  position: relative;
+}
+
+.ProseMirror .drop-target::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -2px;
+  height: 4px;
+  background-color: hsl(var(--primary));
+  animation: dropTargetShow 0.5s infinite alternate;
+}
+
+@keyframes dropTargetShow {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+/* Estilo mejorado para las teclas de atajos */
+.shortcut-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.6rem;
+  height: 1.6rem;
+  padding: 0 0.3rem;
+  font-size: 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.25rem;
+  background-color: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+  box-shadow: 0 1px 0 0 hsl(var(--border));
+  margin: 0 0.15rem;
+}
+
+.shortcut-key-combo {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.shortcut-key-combo .plus {
+  margin: 0 2px;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Estilo mejorado para los tooltips */
+.tooltip {
+  position: relative;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5rem;
+  background-color: hsl(var(--popover));
+  color: hsl(var(--popover-foreground));
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+/* Efecto hover para tarjetas y elementos interactivos */
+.hover-lift {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  transform: scale(1);
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(40);
+    opacity: 0;
+  }
+}
+
+/* Mejora visual para documentos y carpetas seleccionados */
+.folder-tree .bg-primary\/5 {
+  background-color: hsl(var(--primary) / 0.07) !important;
+  border-left: 2px solid hsl(var(--primary));
+}
+
+.folder-tree .border-primary {
+  border-color: hsl(var(--primary)) !important;
+}
+
+.folder-tree .text-primary {
+  color: hsl(var(--primary)) !important;
+}
+
+.folder-tree .hover\:bg-accent:hover {
+  background-color: hsl(var(--accent) / 0.5) !important;
+}
+
+/* Estilos específicos para el sidebar colapsado */
+.sidebar-collapsed {
+  width: 2rem !important; /* Forzar ancho de 32px */
+}
+
+.sidebar-collapsed * {
+  overflow: hidden;
+}
+
+.sidebar-collapsed .text-sm,
+.sidebar-collapsed h2,
+.sidebar-collapsed .folder-tree,
+.sidebar-collapsed .sidebar-section-content,
+.sidebar-collapsed .space-y-1,
+.sidebar-collapsed .px-4,
+.sidebar-collapsed .py-3,
+.sidebar-collapsed .sidebar-section,
+.sidebar-collapsed .py-2 {
+  display: none !important;
+}
+
+/* Mostrar solo el botón de toggle cuando está colapsado */
+.sidebar-collapsed .border-b {
+  border-bottom: none !important;
+  height: auto;
+  padding: 0;
+}
+
+.sidebar-collapsed .flex.items-center.gap-1\.5 {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ajustar la altura del header para el botón de toggle */
+.sidebar-collapsed .h-14 {
+  height: auto;
+  padding: 0.5rem 0;
+}
+
+.sidebar-collapsed .flex.flex-col {
+  padding-top: 0.5rem;
+}
+
+/* Eliminar cualquier padding adicional */
+.sidebar-collapsed div {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Maximizar el espacio de trabajo */
+.sidebar-collapsed + div {
+  margin-left: 0;
+}
+
+/* Ocultar elementos adicionales en el modo contraído */
+.sidebar-collapsed .text-sm {
+  opacity: 0;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.sidebar-collapsed h2 {
+  display: none;
+}
+
+.sidebar-collapsed .group:hover .text-sm {
+  opacity: 1;
+  position: absolute;
+  margin-left: 3rem;
+  z-index: 50;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: hsl(var(--background));
+  white-space: nowrap;
+}
+
+.sidebar-collapsed .px-4 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.sidebar-collapsed .px-3 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.sidebar-collapsed .pl-6,
+.sidebar-collapsed .pl-8 {
+  padding-left: 0;
+}
+
+/* Ocultar elementos adicionales en el modo contraído */
+.sidebar-collapsed .flex.justify-between.items-center,
+.sidebar-collapsed .px-4,
+.sidebar-collapsed .py-3 {
+  display: none;
+}
+
+/* Centrar el botón de toggle en modo colapsado */
+.sidebar-collapsed .flex.items-center.gap-1\.5 {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+/* Asegurar que el botón de toggle sea el único visible */
+.sidebar-collapsed .border-b {
+  border-bottom-width: 0;
+}
+
+/* Ocultar completamente el contenido del sidebar excepto el botón de toggle */
+.sidebar-collapsed .sidebar-section,
+.sidebar-collapsed .py-2 {
+  display: none;
+}
+
+/* Maximizar el espacio de trabajo */
+.sidebar-collapsed + .w-full {
+  padding-left: 0;
+}
+
+/* Ajustar el botón de toggle para que sea más visible */
+.sidebar-collapsed .hover\:bg-sidebar-accent\/20:hover {
+  background-color: hsl(var(--primary) / 0.15);
+}
+
+/* Quitar margen de contenedores anidados en modo contraído */
+.sidebar-collapsed .folder-content {
+  margin-left: 0;
+  padding-left: 8px;
+  border-left: none;
+}
+
+/* Centrar iconos en modo contraído */
+.sidebar-collapsed .flex.items-center.px-3.py-1\.5 {
+  justify-content: center;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+/* Tooltips para elementos en sidebar colapsado */
+.sidebar-collapsed .flex.items-center:hover::after {
+  content: attr(data-name);
+  position: absolute;
+  left: 100%;
+  margin-left: 10px;
+  padding: 0.25rem 0.5rem;
+  background-color: hsl(var(--popover));
+  color: hsl(var(--popover-foreground));
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  z-index: 50;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-collapsed .text-sm,
+.sidebar-collapsed .folder-tree,
+.sidebar-collapsed .sidebar-section-content {
+  display: none;
+}
+
+/* Centrar el botón de toggle en modo colapsado */
+.sidebar-collapsed .flex.items-center.gap-1\.5 {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Estilos para las líneas guía de la jerarquía de carpetas */
+.folder-tree .folder-content {
+  position: relative;
+  margin-left: 12px;
+  padding-left: 10px;
+  border-left: 1px dashed hsl(var(--muted-foreground) / 0.15);
+}
+
+/* Estilo para los documentos dentro de carpetas */
+.folder-tree .folder-content > div {
+  position: relative;
+}
+
+.folder-tree .folder-content > div::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  width: 8px;
+  height: 1px;
+  background-color: hsl(var(--muted-foreground) / 0.12);
+}
+
+/* En modo colapsado, ocultar las líneas guía */
+.sidebar-collapsed .folder-content {
+  border-left: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+/* Estilos para documentos con sangría */
+.folder-content .flex.items-center.group.px-4 {
+  position: relative;
+}
+
+.folder-content .flex.items-center.group.px-4::before {
+  content: '';
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  width: 8px;
+  height: 1px;
+  background-color: hsl(var(--muted-foreground) / 0.3);
+}
+
+/* Estilo hover mejorado para archivos y carpetas */
+.folder-tree .animate-fade-in > div:first-child:hover {
+  background-color: hsl(var(--accent) / 0.7);
+}
+
+/* Estilos específicos para el editor TipTap */
+.ProseMirror {
+  outline: none;
+  min-height: 300px;
+  padding-bottom: 100px; /* Para garantizar que hay espacio al final del documento */
+}
+
+.ProseMirror hr {
+  border: none;
+  border-top: 2px solid hsl(var(--border));
+  margin: 1.5rem 0;
+}
+
+.ProseMirror pre {
+  background-color: hsl(var(--muted));
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+.ProseMirror code {
+  font-family: monospace;
+  background-color: hsl(var(--muted));
+  padding: 0.2em 0.4em;
+  border-radius: 0.3em;
+  font-size: 0.9em;
+}
+
+.ProseMirror pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: 1em;
+}
+
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ProseMirror img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Indicador de carga para imágenes */
+.ProseMirror img[src^="data:"] {
+  position: relative;
+}
+
+.ProseMirror img[src^="data:"]:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 25%,
+    hsl(var(--muted)) 25%,
+    hsl(var(--muted)) 50%,
+    transparent 50%,
+    transparent 75%,
+    hsl(var(--muted)) 75%
+  );
+  background-size: 20px 20px;
+  animation: loading-stripes 1s linear infinite;
+  border-radius: 0.5rem;
+}
+
+@keyframes loading-stripes {
+  0% { background-position: 0 0; }
+  100% { background-position: 20px 20px; }
+}
+
+/* Estilos para drag & drop de imágenes */
+.editor-content-container {
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground)/0.3) transparent;
+  border-radius: 0.5rem;
+}
+
+.editor-content-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.editor-content-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.editor-content-container::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--muted-foreground)/0.3);
+  border-radius: 6px;
+}
+
+.editor-content-container::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--muted-foreground)/0.5);
+}
+
+.drag-drop-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.1),
+    hsl(var(--primary) / 0.05)
+  );
+  border: 2px dashed hsl(var(--primary));
+  border-radius: 0.5rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+}
+
+.editor-content-container:has([data-dragging="true"]) .drag-drop-overlay,
+.editor-content-container.drag-over .drag-drop-overlay {
+  display: flex;
+}
+
+.drag-drop-message {
+  text-align: center;
+  padding: 2rem;
+  background: hsl(var(--background) / 0.9);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Animación para cuando se arrastra sobre el área */
+@keyframes dragPulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.02); opacity: 1; }
+}
+
+.editor-content-container.drag-over .drag-drop-overlay {
+  animation: dragPulse 1s ease-in-out infinite;
+}
+
+/* Estilos para los botones de importar/exportar */
+.import-export-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.import-export-buttons .dropdown-trigger {
+  transition: all 0.2s ease;
+}
+
+.import-export-buttons .dropdown-trigger:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para preview de exportación */
+.export-preview {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  background: hsl(var(--muted) / 0.3);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Mejorar la feedback visual para importación */
+.import-success {
+  border: 2px solid hsl(var(--primary));
+  background: hsl(var(--primary) / 0.1);
+  animation: importSuccess 0.5s ease-out;
+}
+
+@keyframes importSuccess {
+  0% {
+    transform: scale(0.98);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.01);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Estilos para dropdowns personalizados */
+.dropdown-content-improved {
+  position: fixed !important;
+  z-index: 50 !important;
+  max-height: 400px !important;
+  overflow-y: auto !important;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04) !important;
+}
+
+/* =================================
+   DROPDOWN FIXES - Global Styles
+   ================================= */
+
+/* Forzar z-index y posicionamiento correcto para todos los dropdowns de Radix UI */
+[data-radix-popper-content-wrapper] {
+  z-index: 999 !important;
+  position: fixed !important;
+}
+
+[data-radix-dropdown-menu-content],
+[data-radix-popover-content],
+[data-radix-tooltip-content] {
+  z-index: 999 !important;
+  position: fixed !important;
+  max-height: 50vh !important;
+  overflow-y: auto !important;
+  border-radius: 8px !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+  /* Forzar scroll visible */
+  scrollbar-width: thin !important;
+  scrollbar-color: hsl(var(--muted-foreground)) hsl(var(--muted)) !important;
+}
+
+/* Estilos específicos para dropdowns de nuestros componentes */
+.table-dropdown-content,
+.tableheader-dropdown-content,
+.tablerow-dropdown-content,
+.tasklist-dropdown-content,
+.heading-dropdown-content,
+.mention-dropdown-content,
+.image-dropdown-content,
+.list-item-dropdown-content,
+.emoji-dropdown-content {
+  position: fixed !important;
+  z-index: 999 !important;
+  max-height: 50vh !important;
+  overflow-y: auto !important;
+  transform: translateZ(0) !important;
+  will-change: transform !important;
+  /* Mejor comportamiento de scroll */
+  scroll-behavior: smooth !important;
+  /* Asegurar que no se corte */
+  min-width: 200px !important;
+  max-width: 90vw !important;
+}
+
+/* Forzar scroll visible y funcional */
+.table-dropdown-content::-webkit-scrollbar,
+.tableheader-dropdown-content::-webkit-scrollbar,
+.tablerow-dropdown-content::-webkit-scrollbar,
+.tasklist-dropdown-content::-webkit-scrollbar,
+.heading-dropdown-content::-webkit-scrollbar,
+.mention-dropdown-content::-webkit-scrollbar,
+.image-dropdown-content::-webkit-scrollbar,
+.list-item-dropdown-content::-webkit-scrollbar,
+.emoji-dropdown-content::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+.table-dropdown-content::-webkit-scrollbar-track,
+.tableheader-dropdown-content::-webkit-scrollbar-track,
+.tablerow-dropdown-content::-webkit-scrollbar-track,
+.tasklist-dropdown-content::-webkit-scrollbar-track,
+.heading-dropdown-content::-webkit-scrollbar-track,
+.mention-dropdown-content::-webkit-scrollbar-track,
+.image-dropdown-content::-webkit-scrollbar-track,
+.list-item-dropdown-content::-webkit-scrollbar-track,
+.emoji-dropdown-content::-webkit-scrollbar-track {
+  background: hsl(var(--muted)) !important;
+  border-radius: 4px !important;
+}
+
+.table-dropdown-content::-webkit-scrollbar-thumb,
+.tableheader-dropdown-content::-webkit-scrollbar-thumb,
+.tablerow-dropdown-content::-webkit-scrollbar-thumb,
+.tasklist-dropdown-content::-webkit-scrollbar-thumb,
+.heading-dropdown-content::-webkit-scrollbar-thumb,
+.mention-dropdown-content::-webkit-scrollbar-thumb,
+.image-dropdown-content::-webkit-scrollbar-thumb,
+.list-item-dropdown-content::-webkit-scrollbar-thumb,
+.emoji-dropdown-content::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground)) !important;
+  border-radius: 4px !important;
+  opacity: 0.5 !important;
+}
+
+.table-dropdown-content::-webkit-scrollbar-thumb:hover,
+.tableheader-dropdown-content::-webkit-scrollbar-thumb:hover,
+.tablerow-dropdown-content::-webkit-scrollbar-thumb:hover,
+.tasklist-dropdown-content::-webkit-scrollbar-thumb:hover,
+.heading-dropdown-content::-webkit-scrollbar-thumb:hover,
+.mention-dropdown-content::-webkit-scrollbar-thumb:hover,
+.image-dropdown-content::-webkit-scrollbar-thumb:hover,
+.list-item-dropdown-content::-webkit-scrollbar-thumb:hover,
+.emoji-dropdown-content::-webkit-scrollbar-thumb:hover {
+  opacity: 0.8 !important;
+}
+
+/* Asegurar que el viewport no interfiera */
+.table-dropdown-content,
+.tableheader-dropdown-content,
+.tablerow-dropdown-content,
+.tasklist-dropdown-content,
+.heading-dropdown-content,
+.mention-dropdown-content,
+.image-dropdown-content,
+.list-item-dropdown-content,
+.emoji-dropdown-content {
+  max-width: 90vw !important;
+  min-height: auto !important;
+}
+
+/* Reducir z-index del editor toolbar para que no interfiera */
+.editor-toolbar,
+.sticky {
+  z-index: 30 !important;
+}
+
+/* Forzar que el contenedor padre no limite el dropdown */
+[data-radix-dropdown-menu-viewport] {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* Asegurar que los dropdowns no se corten en pantallas pequeñas */
+[data-radix-dropdown-menu-content] {
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin) !important;
+  animation: contentShow 0.15s ease-out !important;
+}
+
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Para contenidos largos, garantizar scroll */
+@media (max-height: 600px) {
+  .table-dropdown-content,
+  .tableheader-dropdown-content,
+  .tablerow-dropdown-content,
+  .tasklist-dropdown-content,
+  .heading-dropdown-content,
+  .mention-dropdown-content,
+  .image-dropdown-content,
+  .list-item-dropdown-content,
+  .emoji-dropdown-content {
+    max-height: 40vh !important;
+  }
+}
+
+/* Estilos adicionales para DragHandle */
+.custom-drag-handle {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.375rem;
+  cursor: grab;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.custom-drag-handle:hover {
+  opacity: 1;
+  background: hsl(var(--accent));
+  border-color: hsl(var(--primary));
+  transform: scale(1.05);
+}
+
+.custom-drag-handle:active {
+  cursor: grabbing;
+  transform: scale(0.95);
+}
+
+.custom-drag-handle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23666'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M3.75 9h16.5m-16.5 6.75h16.5'/%3e%3c/svg%3e");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.dark .custom-drag-handle::before {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23ccc'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M3.75 9h16.5m-16.5 6.75h16.5'/%3e%3c/svg%3e");
+}
+
+/* Estilos de scrollbar para nombres largos en el sidebar */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  transition: scrollbar-color 0.3s ease;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-track-transparent::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 2px 0; /* Espacio superior e inferior */
+}
+
+.scrollbar-thumb-gray-300::-webkit-scrollbar-thumb {
+  background-color: rgb(209 213 219);
+  border-radius: 3px;
+  margin: 2px 0; /* Espacio adicional */
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.scrollbar-thumb-gray-300::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(156 163 175);
+}
+
+.hover\:scrollbar-thumb-gray-400:hover::-webkit-scrollbar-thumb {
+  background-color: rgb(156 163 175);
+}
+
+/* Para modo oscuro */
+.dark .scrollbar-thumb-gray-300::-webkit-scrollbar-thumb {
+  background-color: rgb(75 85 99);
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.dark .scrollbar-thumb-gray-300::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(107 114 128);
+}
+
+.dark .hover\:scrollbar-thumb-gray-400:hover::-webkit-scrollbar-thumb {
+  background-color: rgb(107 114 128);
+}
+
+/* Auto-hide scrollbar después de 2 segundos */
+.scrollbar-autohide {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.3s ease;
+}
+
+.scrollbar-autohide::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+/* Mostrar scrollbar en hover y scroll activo */
+.scrollbar-autohide:hover,
+.scrollbar-autohide:focus,
+.scrollbar-autohide.scrolling {
+  scrollbar-color: rgb(209 213 219) transparent;
+}
+
+.scrollbar-autohide:hover::-webkit-scrollbar-thumb,
+.scrollbar-autohide:focus::-webkit-scrollbar-thumb,
+.scrollbar-autohide.scrolling::-webkit-scrollbar-thumb {
+  background-color: rgb(209 213 219);
+}
+
+/* Para modo oscuro - auto-hide */
+.dark .scrollbar-autohide:hover,
+.dark .scrollbar-autohide:focus,
+.dark .scrollbar-autohide.scrolling {
+  scrollbar-color: rgb(75 85 99) transparent;
+}
+
+.dark .scrollbar-autohide:hover::-webkit-scrollbar-thumb,
+.dark .scrollbar-autohide:focus::-webkit-scrollbar-thumb,
+.dark .scrollbar-autohide.scrolling::-webkit-scrollbar-thumb {
+  background-color: rgb(75 85 99);
+}
+
+/* Contenedor con scroll horizontal - agregar padding inferior para separar del scrollbar */
+.overflow-x-auto {
+  padding-bottom: 8px; /* Espacio entre texto y scrollbar */
+  margin-bottom: -4px; /* Compensar el padding extra */
+}
+
+/* Ajustar el contenedor de texto para tener espacio del scrollbar */
+.overflow-x-auto .whitespace-nowrap {
+  padding-bottom: 2px; /* Espacio adicional bajo el texto */
+  line-height: 1.3; /* Ajustar altura de línea */
+}

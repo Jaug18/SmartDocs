@@ -1,0 +1,171 @@
+/* HorizontalRuleButton Component Styles */
+.horizontal-rule-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.horizontal-rule-button:hover {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+.horizontal-rule-button:active {
+  @apply bg-gray-200 dark:bg-gray-700;
+  transform: translateY(0);
+}
+
+.horizontal-rule-button:disabled {
+  @apply bg-gray-50 dark:bg-gray-900;
+  @apply text-gray-400 dark:text-gray-600;
+  @apply border-gray-200 dark:border-gray-800;
+  @apply cursor-not-allowed;
+  transform: none;
+}
+
+/* Tooltip Styles */
+.horizontal-rule-tooltip {
+  @apply text-center;
+}
+
+.horizontal-rule-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.horizontal-rule-tooltip__shortcut {
+  @apply text-xs text-gray-500 dark:text-gray-400;
+  @apply bg-gray-100 dark:bg-gray-800;
+  @apply px-2 py-1 rounded;
+  @apply font-mono;
+}
+
+/* Horizontal Rule Element Styles in Editor */
+.ProseMirror hr {
+  @apply border-none border-t border-gray-300 dark:border-gray-600;
+  @apply cursor-pointer;
+  @apply my-8;
+  @apply transition-all duration-200;
+  @apply relative;
+  @apply select-none;
+}
+
+.ProseMirror hr:hover {
+  @apply border-gray-400 dark:border-gray-500;
+  @apply shadow-sm;
+}
+
+.ProseMirror hr.ProseMirror-selectednode {
+  @apply border-blue-500 dark:border-blue-400;
+  @apply shadow-md;
+  @apply ring-2 ring-blue-500 ring-opacity-20;
+}
+
+/* Enhanced horizontal rule with gradient effect */
+.ProseMirror hr::before {
+  content: '';
+  @apply absolute top-0 left-0 right-0;
+  @apply h-px;
+  @apply bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent;
+  @apply opacity-0;
+  @apply transition-opacity duration-200;
+}
+
+.ProseMirror hr:hover::before {
+  @apply opacity-100;
+}
+
+/* Focus states for better accessibility */
+.ProseMirror hr:focus {
+  @apply outline-none;
+  @apply border-blue-500 dark:border-blue-400;
+  @apply ring-2 ring-blue-500 ring-opacity-30;
+}
+
+/* Animation for horizontal rule insertion */
+@keyframes hr-insert {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scaleX(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.ProseMirror hr:focus-within {
+  animation: hr-insert 0.3s ease-in-out;
+}
+
+/* Custom horizontal rule styles with decorative elements */
+.ProseMirror hr[data-type="decorative"]::after {
+  content: '◆';
+  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  @apply bg-white dark:bg-gray-900;
+  @apply px-2;
+  @apply text-gray-400 dark:text-gray-500;
+  @apply text-xs;
+}
+
+/* Dark mode adjustments */
+.dark .horizontal-rule-button {
+  @apply text-gray-200;
+}
+
+.dark .horizontal-rule-button:hover {
+  @apply text-white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .horizontal-rule-button {
+    @apply text-xs;
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .ProseMirror hr {
+    @apply my-6;
+  }
+}
+
+/* Special handling for horizontal rules in different contexts */
+.ProseMirror blockquote hr {
+  @apply border-gray-200 dark:border-gray-700;
+  @apply my-4;
+}
+
+.ProseMirror .details hr {
+  @apply border-gray-200 dark:border-gray-700;
+  @apply my-3;
+}
+
+/* Ensure proper spacing around horizontal rules */
+.ProseMirror hr + p,
+.ProseMirror hr + h1,
+.ProseMirror hr + h2,
+.ProseMirror hr + h3,
+.ProseMirror hr + h4,
+.ProseMirror hr + h5,
+.ProseMirror hr + h6 {
+  @apply mt-8;
+}
+
+.ProseMirror p + hr,
+.ProseMirror h1 + hr,
+.ProseMirror h2 + hr,
+.ProseMirror h3 + hr,
+.ProseMirror h4 + hr,
+.ProseMirror h5 + hr,
+.ProseMirror h6 + hr {
+  @apply mt-8;
+}

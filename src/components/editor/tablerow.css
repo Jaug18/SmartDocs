@@ -1,0 +1,151 @@
+/* TableRowButton Component Styles */
+.tablerow-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.tablerow-button:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+/* Table Row Dropdown Styles */
+.tablerow-dropdown-content {
+  @apply w-48;
+  max-height: 50vh !important;
+  overflow-y: auto !important;
+  z-index: 999 !important;
+  position: fixed !important;
+}
+
+.tablerow-dropdown-label {
+  @apply font-medium text-sm px-2 py-1.5;
+  @apply border-b border-border;
+}
+
+.tablerow-dropdown-item {
+  @apply cursor-pointer transition-colors;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply flex items-center gap-2;
+}
+
+.tablerow-dropdown-item:hover {
+  @apply transform scale-[1.02];
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.tablerow-dropdown-item:focus {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Destructive actions styling */
+.tablerow-dropdown-item.text-destructive {
+  color: hsl(var(--destructive));
+}
+
+.tablerow-dropdown-item.text-destructive:hover,
+.tablerow-dropdown-item.text-destructive:focus {
+  background: hsl(var(--destructive));
+  color: hsl(var(--destructive-foreground));
+}
+
+/* Icon styling within dropdown items */
+.tablerow-dropdown-item svg {
+  @apply w-4 h-4 flex-shrink-0;
+}
+
+/* Tooltip Styles */
+.tablerow-tooltip {
+  @apply text-center;
+}
+
+.tablerow-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.tablerow-tooltip__shortcut {
+  @apply text-xs text-muted-foreground;
+}
+
+.tablerow-tooltip kbd {
+  @apply inline-flex items-center justify-center rounded border border-border bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .tablerow-button {
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .tablerow-dropdown-content {
+    @apply w-44;
+  }
+}
+
+/* Row-specific table styling enhancements */
+.tiptap table tr {
+  @apply transition-colors duration-150;
+}
+
+.tiptap table tr:hover {
+  @apply bg-gray-50 dark:bg-gray-800/50;
+}
+
+.tiptap table tr.selected-row {
+  @apply bg-emerald-50 dark:bg-emerald-900/20;
+}
+
+.tiptap table tr.selected-row td,
+.tiptap table tr.selected-row th {
+  @apply border-emerald-200 dark:border-emerald-800;
+}
+
+/* Row controls for advanced operations */
+.tablerow-controls {
+  @apply flex items-center gap-1 p-1 bg-background border border-border rounded-md shadow-sm;
+  @apply absolute left-0 z-10;
+  @apply opacity-0 transition-opacity duration-200;
+}
+
+.tiptap table tr:hover .tablerow-controls {
+  @apply opacity-100;
+}
+
+.tablerow-control-button {
+  @apply p-1 rounded disabled:opacity-50 disabled:pointer-events-none;
+  @apply transition-colors duration-150;
+}
+
+.tablerow-control-button:hover {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Dark mode enhancements */
+.dark .tablerow-button {
+  @apply hover:bg-gray-800;
+}
+
+.dark .tablerow-dropdown-content {
+  @apply border-gray-600;
+}
+
+/* Animation for row operations */
+@keyframes row-highlight {
+  0% { background-color: hsl(var(--accent) / 0.1); }
+  50% { background-color: hsl(var(--accent) / 0.3); }
+  100% { background-color: transparent; }
+}
+
+.tiptap table tr.row-operation {
+  animation: row-highlight 0.5s ease-in-out;
+}

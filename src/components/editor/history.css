@@ -1,0 +1,58 @@
+/* History Button Styles */
+.history-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.history-button:hover:not(:disabled) {
+  background-color: hsl(var(--muted));
+}
+
+.history-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.history-button:disabled:hover {
+  background-color: transparent;
+}
+
+/* Specific styles for undo/redo buttons */
+.history-button-undo {
+  color: hsl(var(--foreground));
+}
+
+.history-button-redo {
+  color: hsl(var(--foreground));
+}
+
+.history-button-undo:hover:not(:disabled) {
+  background-color: hsl(var(--muted));
+  color: hsl(var(--primary));
+}
+
+.history-button-redo:hover:not(:disabled) {
+  background-color: hsl(var(--muted));
+  color: hsl(var(--primary));
+}
+
+/* Active state for history buttons */
+.history-button:active:not(:disabled) {
+  background-color: hsl(var(--accent));
+  transform: scale(0.95);
+}
+
+/* Focus styles for accessibility */
+.history-button:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Tooltip styling for history buttons */
+.history-tooltip {
+  font-size: 0.875rem;
+}
+
+.history-tooltip .text-muted-foreground {
+  color: hsl(var(--muted-foreground));
+  margin-top: 0.125rem;
+}

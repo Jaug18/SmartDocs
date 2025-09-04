@@ -1,0 +1,259 @@
+/* TableButton Component Styles */
+.table-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+/* Active state when inside a table */
+.table-button.bg-accent {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.table-button:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+/* Table Dropdown Styles */
+.table-dropdown-button {
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-accent hover:text-accent-foreground;
+  @apply focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.table-dropdown-button[data-state="open"] {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.table-dropdown-content {
+  max-height: 50vh !important;
+  overflow-y: auto !important;
+  z-index: 999 !important;
+  position: fixed !important;
+}
+
+.table-dropdown-label {
+  @apply font-medium text-sm px-2 py-1.5;
+  @apply border-b border-border;
+}
+
+.table-dropdown-item {
+  @apply cursor-pointer transition-colors;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply flex items-center gap-2;
+}
+
+.table-dropdown-item:hover {
+  @apply transform scale-[1.02];
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.table-dropdown-item:focus {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Destructive actions styling */
+.table-dropdown-item.text-destructive {
+  color: hsl(var(--destructive));
+}
+
+.table-dropdown-item.text-destructive:hover,
+.table-dropdown-item.text-destructive:focus {
+  background: hsl(var(--destructive));
+  color: hsl(var(--destructive-foreground));
+}
+
+/* Icon styling within dropdown items */
+.table-dropdown-item svg {
+  @apply w-4 h-4 flex-shrink-0;
+}
+
+/* Tooltip Styles */
+.table-tooltip {
+  @apply text-center;
+}
+
+.table-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.table-tooltip__shortcut {
+  @apply text-xs text-muted-foreground;
+}
+
+.table-tooltip kbd {
+  @apply inline-flex items-center justify-center rounded border border-border bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .table-button {
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .table-dropdown-content {
+    @apply w-48;
+  }
+}
+
+/* Table controls for advanced operations */
+.table-controls {
+  @apply flex items-center gap-1 p-1 bg-background border border-border rounded-md shadow-sm;
+  @apply absolute top-0 left-0 z-10;
+  @apply opacity-0 transition-opacity duration-200;
+}
+
+.tiptap table:hover .table-controls {
+  @apply opacity-100;
+}
+
+.table-control-button {
+  @apply p-1 rounded disabled:opacity-50 disabled:pointer-events-none;
+  @apply transition-colors duration-150;
+}
+
+.table-control-button:hover {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Enhanced table selection states */
+.tiptap table .selectedCell {
+  background: hsl(var(--accent) / 0.2);
+}
+
+.tiptap table .selectedCell:after {
+  background: hsl(var(--accent) / 0.1);
+  content: "";
+  left: 0; 
+  right: 0; 
+  top: 0; 
+  bottom: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+  border: 2px solid hsl(var(--accent));
+}
+
+/* TipTap Editor Table Styles - Enhanced from Official Examples */
+.tiptap table {
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  overflow: hidden;
+  table-layout: fixed;
+  width: 100%;
+  @apply rounded-lg shadow-sm;
+  @apply border border-gray-200 dark:border-gray-700;
+}
+
+.tiptap table td,
+.tiptap table th {
+  @apply border border-gray-300 dark:border-gray-600;
+  box-sizing: border-box;
+  min-width: 1em;
+  padding: 8px 12px;
+  position: relative;
+  vertical-align: top;
+  @apply transition-colors duration-150;
+}
+
+.tiptap table td > *,
+.tiptap table th > * {
+  margin-bottom: 0;
+}
+
+.tiptap table th {
+  @apply bg-gray-50 dark:bg-gray-800;
+  @apply font-semibold text-left;
+  @apply text-gray-900 dark:text-gray-100;
+}
+
+.tiptap table td {
+  @apply bg-white dark:bg-gray-900;
+  @apply text-gray-900 dark:text-gray-100;
+}
+
+.tiptap table td:hover,
+.tiptap table th:hover {
+  @apply bg-gray-50 dark:bg-gray-800/50;
+}
+
+/* Selected cell styling */
+.tiptap table .selectedCell:after {
+  @apply bg-emerald-100 dark:bg-emerald-900/30;
+  content: "";
+  left: 0; 
+  right: 0; 
+  top: 0; 
+  bottom: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+  @apply border-2 border-emerald-500;
+}
+
+/* Column resize handle */
+.tiptap table .column-resize-handle {
+  @apply bg-emerald-500;
+  bottom: -2px;
+  pointer-events: none;
+  position: absolute;
+  right: -2px;
+  top: 0;
+  width: 4px;
+  @apply opacity-0 transition-opacity duration-150;
+}
+
+.tiptap table:hover .column-resize-handle {
+  @apply opacity-100;
+}
+
+/* Table wrapper for responsive scrolling */
+.tiptap .tableWrapper {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  @apply rounded-lg;
+  @apply shadow-sm;
+}
+
+/* Resize cursor */
+.tiptap.resize-cursor {
+  cursor: ew-resize;
+  cursor: col-resize;
+}
+
+/* Empty table state */
+.tiptap table:empty::before {
+  content: "Tabla vacía";
+  @apply text-gray-400 dark:text-gray-600;
+  @apply text-center italic;
+  display: block;
+  padding: 2rem;
+}
+
+/* Dark mode enhancements */
+.dark .tiptap table {
+  @apply shadow-lg;
+}
+
+.dark .tiptap table td,
+.dark .tiptap table th {
+  @apply border-gray-600;
+}
+
+/* Table focus styling */
+.tiptap table:focus-within {
+  @apply ring-2 ring-emerald-500 ring-offset-2;
+}

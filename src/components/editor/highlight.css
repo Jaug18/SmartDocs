@@ -1,0 +1,218 @@
+/* HighlightButton Component Styles */
+.highlight-button,
+.highlight-toggle {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.highlight-button:hover:not(:disabled),
+.highlight-toggle:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+/* Active state for toggle */
+.highlight-toggle--active,
+.highlight-toggle[data-state="on"] {
+  @apply bg-accent text-accent-foreground;
+  background: linear-gradient(135deg, #faf594 0%, #ffeb3b 100%);
+  color: #333;
+}
+
+/* Active state for button */
+.highlight-button.bg-accent {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Highlight Dropdown Styles */
+.highlight-dropdown-content {
+  @apply w-52;
+  max-height: 50vh !important;
+  overflow-y: auto !important;
+  z-index: 999 !important;
+  position: fixed !important;
+}
+
+.highlight-dropdown-label {
+  @apply font-medium text-sm px-2 py-1.5;
+  @apply border-b border-border;
+}
+
+.highlight-dropdown-item {
+  @apply cursor-pointer transition-colors;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply flex items-center gap-2;
+  min-height: 2.5rem;
+}
+
+.highlight-dropdown-item:hover {
+  @apply transform scale-[1.02];
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.highlight-dropdown-item:focus {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.highlight-dropdown-item--active {
+  @apply bg-accent text-accent-foreground;
+  @apply font-medium;
+}
+
+/* Icon styling within dropdown items */
+.highlight-dropdown-item svg {
+  @apply w-4 h-4 flex-shrink-0;
+}
+
+/* Tooltip Styles */
+.highlight-tooltip {
+  @apply text-center;
+}
+
+.highlight-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.highlight-tooltip__shortcut {
+  @apply text-xs text-muted-foreground;
+}
+
+.highlight-tooltip kbd {
+  @apply inline-flex items-center justify-center rounded border border-border bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .highlight-button,
+  .highlight-toggle {
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .highlight-dropdown-content {
+    @apply w-48;
+  }
+}
+
+/* Enhanced Highlight text styles for TipTap editor */
+.tiptap mark {
+  @apply rounded px-1 py-0.5;
+  @apply transition-all duration-150;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.25rem;
+  /* Color will be handled by inline styles from TipTap Highlight extension */
+  color: #333 !important;
+  text-decoration: none;
+  font-weight: inherit;
+  font-style: inherit;
+}
+
+/* Only apply default background when no inline style is present */
+.tiptap mark:not([style*="background-color"]) {
+  background-color: #faf594;
+}
+
+/* Ensure inline styles have priority */
+.tiptap mark[style*="background-color"] {
+  color: #333 !important;
+}
+
+.tiptap mark:hover {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+}
+
+.tiptap mark:focus {
+  @apply outline-2 outline-yellow-500/50 outline-offset-1;
+}
+
+/* IMPORTANT: Inline styles from TipTap Highlight extension should override defaults */
+/* This is handled automatically by the extension when multicolor: true */
+
+/* Custom highlight class from DocumentEditor config */
+.tiptap .custom-highlight {
+  @apply rounded px-1 py-0.5;
+  @apply transition-all duration-150;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.25rem;
+  color: #333 !important;
+  /* Background color will be applied via inline styles when multicolor is enabled */
+}
+
+/* Default background when no inline style is present */
+.tiptap .custom-highlight:not([style*="background-color"]) {
+  background-color: #faf594;
+}
+
+.tiptap .custom-highlight:hover {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+}
+
+/* Dark mode color adjustments */
+.dark .tiptap mark,
+.dark .tiptap .custom-highlight {
+  color: #1a1a1a !important;
+  /* Ensure text remains dark even in dark mode for readability */
+}
+
+/* Accessibility improvements */
+.highlight-button:focus-visible,
+.highlight-toggle:focus-visible {
+  @apply ring-2 ring-yellow-500/50 ring-offset-2;
+}
+
+/* Animation for highlight text application */
+@keyframes highlight-apply {
+  0% {
+    background-color: transparent;
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+    background-color: rgba(255, 235, 59, 0.8);
+  }
+  100% {
+    background-color: #faf594;
+    transform: scale(1);
+  }
+}
+
+.tiptap mark.new-highlight {
+  animation: highlight-apply 0.3s ease-out forwards;
+}
+
+/* Color swatches in dropdown */
+.highlight-color-swatch {
+  @apply w-4 h-4 rounded border border-gray-300;
+  @apply transition-all duration-150;
+}
+
+.highlight-color-swatch:hover {
+  @apply scale-110 shadow-sm;
+}
+
+/* Custom highlight colors */
+.tiptap mark.highlight-yellow { background-color: #ffc078 !important; }
+.tiptap mark.highlight-green { background-color: #8ce99a !important; }
+.tiptap mark.highlight-blue { background-color: #74c0fc !important; }
+.tiptap mark.highlight-purple { background-color: #b197fc !important; }
+.tiptap mark.highlight-pink { background-color: #ffa8a8 !important; }
+.tiptap mark.highlight-orange { background-color: #ffb366 !important; }
+.tiptap mark.highlight-lime { background-color: #c0eb75 !important; }
+.tiptap mark.highlight-cyan { background-color: #66d9ef !important; }

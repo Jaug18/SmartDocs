@@ -1,0 +1,109 @@
+/* Placeholder Button Styles */
+.placeholder-button {
+  transition: all 0.15s ease;
+}
+
+.placeholder-button:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* Placeholder Dialog Styles */
+.placeholder-dialog-content {
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.placeholder-config-section {
+  margin: 16px 0;
+}
+
+.placeholder-input-field {
+  font-size: 0.875rem;
+}
+
+.preset-placeholders-section {
+  margin: 16px 0;
+}
+
+.preset-placeholders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.preset-placeholder-button {
+  justify-content: flex-start;
+  padding: 8px 12px;
+  height: auto;
+  min-height: 36px;
+  text-align: left;
+}
+
+.preset-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.preset-placeholder-button:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* Enhanced placeholder styles */
+.tiptap p.is-editor-empty:first-child::before {
+  color: var(--muted-foreground);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  font-style: italic;
+}
+
+.tiptap h1.is-empty::before,
+.tiptap h2.is-empty::before,
+.tiptap h3.is-empty::before,
+.tiptap h4.is-empty::before,
+.tiptap h5.is-empty::before,
+.tiptap h6.is-empty::before {
+  color: var(--muted-foreground);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.tiptap p.is-empty::before {
+  color: var(--muted-foreground);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  font-style: italic;
+}
+
+/* Dark mode adjustments */
+.dark .tiptap p.is-editor-empty:first-child::before,
+.dark .tiptap .is-empty::before {
+  color: var(--muted-foreground);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .placeholder-dialog-content {
+    max-width: 95vw;
+    margin: 0 auto;
+  }
+  
+  .preset-placeholders-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .preset-placeholder-button {
+    min-height: 44px;
+  }
+}

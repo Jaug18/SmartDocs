@@ -1,0 +1,185 @@
+/* TableHeaderButton Component Styles */
+
+/* Table Header Dropdown Styles */
+.tableheader-dropdown-content {
+  @apply w-56;
+  max-height: 50vh !important;
+  overflow-y: auto !important;
+  z-index: 999 !important;
+  position: fixed !important;
+}
+
+.table-header-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+/* Active state when in header cell */
+.table-header-button.bg-accent {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.table-header-button:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+/* Table Header Dropdown Styles */
+.table-header-dropdown-content {
+  @apply w-52;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.table-header-dropdown-label {
+  @apply font-medium text-sm px-2 py-1.5;
+  @apply border-b border-border;
+}
+
+.table-header-dropdown-item {
+  @apply cursor-pointer transition-colors;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply flex items-center gap-2;
+  padding: 8px 12px;
+}
+
+.table-header-dropdown-item:hover {
+  @apply transform scale-[1.02];
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.table-header-dropdown-item:focus {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Icon styling within dropdown items */
+.table-header-dropdown-item svg {
+  @apply w-4 h-4 flex-shrink-0;
+}
+
+/* Active toggle states */
+.table-header-dropdown-item svg.text-green-600 {
+  color: #16a34a;
+}
+
+.dark .table-header-dropdown-item svg.text-green-600 {
+  color: #4ade80;
+}
+
+/* Tooltip Styles */
+.table-header-tooltip {
+  @apply text-center;
+}
+
+.table-header-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.table-header-tooltip__shortcut {
+  @apply text-xs text-muted-foreground;
+}
+
+.table-header-tooltip kbd {
+  @apply inline-flex items-center justify-center rounded border border-border bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground;
+}
+
+/* Enhanced header cell styling in editor */
+.tiptap table th {
+  @apply bg-emerald-50 dark:bg-emerald-900/20;
+  @apply font-semibold text-left;
+  @apply text-gray-900 dark:text-gray-100;
+  @apply border-2 border-emerald-200 dark:border-emerald-800;
+  position: relative;
+}
+
+.tiptap table th::before {
+  content: "";
+  @apply absolute top-0 left-0 w-2 h-full bg-emerald-500;
+  opacity: 0.6;
+}
+
+.tiptap table th:hover {
+  @apply bg-emerald-100 dark:bg-emerald-900/30;
+}
+
+.tiptap table th:focus-within {
+  @apply ring-2 ring-emerald-500 ring-offset-1;
+}
+
+/* Header row styling */
+.tiptap table tr:first-child th {
+  @apply bg-emerald-100 dark:bg-emerald-900/30;
+  @apply border-b-2 border-emerald-300 dark:border-emerald-700;
+}
+
+/* Header column styling */
+.tiptap table tr th:first-child {
+  @apply bg-emerald-100 dark:bg-emerald-900/30;
+  @apply border-r-2 border-emerald-300 dark:border-emerald-700;
+}
+
+/* Mixed header cell (both row and column header) */
+.tiptap table tr:first-child th:first-child {
+  @apply bg-emerald-200 dark:bg-emerald-900/40;
+  @apply border-2 border-emerald-400 dark:border-emerald-600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .table-header-button {
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .table-header-dropdown-content {
+    @apply w-48;
+  }
+  
+  .table-header-dropdown-item {
+    padding: 6px 8px;
+  }
+}
+
+/* Dark mode enhancements */
+.dark .table-header-button {
+  @apply hover:bg-gray-800;
+}
+
+.dark .tiptap table th {
+  @apply bg-emerald-900/20 border-emerald-800;
+}
+
+.dark .tiptap table th::before {
+  @apply bg-emerald-400;
+}
+
+/* Animation for toggle states */
+.table-header-dropdown-item svg {
+  @apply transition-colors duration-200;
+}
+
+.table-header-dropdown-item:hover svg {
+  @apply scale-110;
+}
+
+/* Header cell indicators */
+.tiptap table th[data-type="tableHeader"] {
+  @apply relative;
+}
+
+.tiptap table th[data-type="tableHeader"]::after {
+  content: "H";
+  @apply absolute top-1 right-1 text-xs bg-emerald-500 text-white rounded px-1;
+  @apply opacity-70;
+  font-size: 8px;
+  line-height: 1;
+}

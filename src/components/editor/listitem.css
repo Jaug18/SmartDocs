@@ -1,0 +1,307 @@
+/* ListItemButton Component Styles */
+.list-item-buttons {
+  @apply flex items-center space-x-1;
+}
+
+.list-item-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.list-item-button:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+.list-item-button:disabled {
+  @apply bg-gray-50 dark:bg-gray-900;
+  @apply text-gray-400 dark:text-gray-600;
+  @apply cursor-not-allowed;
+}
+
+.list-item-dropdown-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.list-item-dropdown-button:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+.list-item-dropdown-button--active {
+  @apply bg-purple-100 dark:bg-purple-900/30;
+  @apply border-purple-200 dark:border-purple-800;
+  @apply text-purple-700 dark:text-purple-300;
+  @apply shadow-sm;
+}
+
+.list-item-dropdown-button[data-state="open"] {
+  @apply bg-purple-100 dark:bg-purple-900/30;
+  @apply border-purple-200 dark:border-purple-800;
+  @apply text-purple-700 dark:text-purple-300;
+  @apply shadow-sm;
+}
+
+.list-item-dropdown-button:disabled {
+  @apply bg-gray-50 dark:bg-gray-900;
+  @apply text-gray-400 dark:text-gray-600;
+  @apply border-gray-200 dark:border-gray-800;
+  @apply cursor-not-allowed;
+}
+
+/* Tooltip Styles */
+.list-item-tooltip {
+  @apply text-center;
+}
+
+.list-item-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.list-item-tooltip__shortcut {
+  @apply text-xs text-gray-500 dark:text-gray-400;
+  @apply bg-gray-100 dark:bg-gray-800;
+  @apply px-2 py-1 rounded;
+  @apply font-mono;
+}
+
+.list-item-tooltip__note {
+  @apply text-xs text-purple-600 dark:text-purple-400;
+  @apply font-medium;
+  @apply italic;
+  @apply mt-1;
+}
+
+/* Dropdown Content Styles */
+.list-item-dropdown-content {
+  @apply w-56;
+  @apply bg-white dark:bg-gray-900;
+  @apply border border-gray-200 dark:border-gray-700;
+  @apply rounded-lg shadow-lg;
+  @apply p-2;
+  max-height: 50vh !important;
+  overflow-y: auto !important;
+  z-index: 999 !important;
+  position: fixed !important;
+}
+
+.list-item-dropdown-label {
+  @apply font-semibold text-sm text-gray-700 dark:text-gray-300;
+  @apply px-2 py-1;
+}
+
+.list-item-dropdown-item {
+  @apply flex items-center;
+  @apply p-2 rounded-md;
+  @apply cursor-pointer;
+  @apply transition-all duration-150;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus:bg-gray-100 dark:focus:bg-gray-800;
+  @apply focus:outline-none;
+}
+
+.list-item-dropdown-item:focus {
+  @apply ring-2 ring-purple-500 ring-offset-1;
+}
+
+.list-item-dropdown-item:disabled {
+  @apply opacity-50;
+  @apply cursor-not-allowed;
+  @apply hover:bg-transparent dark:hover:bg-transparent;
+}
+
+.list-item-item__text {
+  @apply flex flex-col flex-1;
+}
+
+.list-item-item__label {
+  @apply font-medium text-sm;
+}
+
+.list-item-item__shortcut {
+  @apply text-xs text-gray-500 dark:text-gray-400;
+  @apply font-mono;
+  @apply mt-0.5;
+}
+
+/* List Item Element Styles in Editor */
+.ProseMirror li {
+  @apply relative;
+  @apply transition-all duration-200;
+}
+
+.ProseMirror li:hover {
+  @apply bg-gray-50 dark:bg-gray-900/50;
+  @apply rounded;
+  @apply pl-1;
+}
+
+.ProseMirror li.ProseMirror-selectednode {
+  @apply bg-purple-50 dark:bg-purple-900/20;
+  @apply ring-1 ring-purple-200 dark:ring-purple-800;
+  @apply rounded;
+}
+
+/* Nested list styling */
+.ProseMirror ul ul,
+.ProseMirror ol ol,
+.ProseMirror ul ol,
+.ProseMirror ol ul {
+  @apply ml-4;
+  @apply mt-1;
+  @apply border-l border-gray-200 dark:border-gray-700;
+  @apply pl-4;
+}
+
+/* List markers */
+.ProseMirror ul {
+  @apply list-disc;
+}
+
+.ProseMirror ul ul {
+  list-style-type: circle;
+}
+
+.ProseMirror ul ul ul {
+  list-style-type: square;
+}
+
+.ProseMirror ol {
+  @apply list-decimal;
+}
+
+.ProseMirror ol ol {
+  list-style-type: lower-alpha;
+}
+
+.ProseMirror ol ol ol {
+  list-style-type: lower-roman;
+}
+
+/* Focus states for better accessibility */
+.ProseMirror li:focus-within {
+  @apply ring-2 ring-purple-500 ring-offset-1;
+  @apply rounded;
+}
+
+/* Animation for list item changes */
+@keyframes listitem-change {
+  0% {
+    background-color: theme('colors.purple.100');
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.ProseMirror li {
+  animation: listitem-change 0.3s ease-in-out;
+}
+
+.dark .ProseMirror li {
+  animation: listitem-change-dark 0.3s ease-in-out;
+}
+
+@keyframes listitem-change-dark {
+  0% {
+    background-color: theme('colors.purple.900/30');
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+/* Dark mode adjustments */
+.dark .list-item-button {
+  @apply text-gray-200;
+}
+
+.dark .list-item-button:hover:not(:disabled) {
+  @apply text-white;
+}
+
+.dark .list-item-dropdown-button {
+  @apply text-gray-200;
+}
+
+.dark .list-item-dropdown-button:hover:not(:disabled) {
+  @apply text-white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .list-item-button {
+    @apply text-xs;
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .list-item-dropdown-button {
+    @apply text-xs;
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .list-item-dropdown-content {
+    @apply w-52;
+  }
+  
+  .ProseMirror ul ul,
+  .ProseMirror ol ol,
+  .ProseMirror ul ol,
+  .ProseMirror ol ul {
+    @apply ml-3 pl-3;
+  }
+}
+
+/* TipTap Editor List Styles - Based on Official Examples */
+.tiptap ul,
+.tiptap ol {
+  padding: 0 1rem;
+  margin: 1.25rem 1rem 1.25rem 0.4rem;
+}
+
+.tiptap ul li,
+.tiptap ol li {
+  margin: 0.25em 0;
+}
+
+.tiptap ul li p,
+.tiptap ol li p {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.tiptap li.my-custom-list-item {
+  @apply text-gray-900 dark:text-gray-100;
+  @apply leading-relaxed;
+}
+
+/* Nested lists */
+.tiptap ul ul,
+.tiptap ol ol,
+.tiptap ul ol,
+.tiptap ol ul {
+  margin: 0.5rem 0 0.5rem 1rem;
+  padding: 0 0 0 1rem;
+}
+
+/* List item selection */
+.tiptap li.ProseMirror-selectednode {
+  @apply outline outline-2 outline-purple-500 outline-offset-2;
+  @apply bg-purple-50 dark:bg-purple-900/20;
+  @apply rounded;
+}

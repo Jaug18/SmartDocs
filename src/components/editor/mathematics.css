@@ -1,0 +1,96 @@
+/* Mathematics Button Styles */
+.mathematics-button {
+  transition: all 0.15s ease;
+}
+
+.mathematics-button:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* Mathematics Dialog Styles */
+.mathematics-dialog-content {
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.mathematics-input-section {
+  margin: 16px 0;
+}
+
+.math-input-field {
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+}
+
+.math-preview {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background-color: var(--muted);
+}
+
+.preview-container {
+  font-family: 'Times New Roman', serif;
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 8px;
+  background-color: var(--background);
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.preset-formulas-section {
+  margin: 16px 0;
+}
+
+.preset-formulas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.preset-formula-button {
+  justify-content: flex-start;
+  padding: 8px 12px;
+  height: auto;
+  min-height: 40px;
+  text-align: left;
+}
+
+.preset-formula-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.preset-formula-button:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* KaTeX integration styles */
+.mathematics-dialog-content .katex {
+  font-size: 1.1em;
+}
+
+.mathematics-dialog-content .katex-display {
+  margin: 0.5em 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .mathematics-dialog-content {
+    max-width: 95vw;
+    margin: 0 auto;
+  }
+  
+  .preset-formulas-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .preset-formula-button {
+    min-height: 48px;
+  }
+}

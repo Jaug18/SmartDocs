@@ -1,0 +1,166 @@
+/* DocumentButton Component Styles */
+.document-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.document-button:hover {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+/* Tooltip Styles */
+.document-tooltip {
+  @apply text-center;
+}
+
+.document-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.document-tooltip__stats {
+  @apply text-xs text-gray-500 dark:text-gray-400;
+  @apply bg-gray-100 dark:bg-gray-800;
+  @apply px-2 py-1 rounded;
+  @apply font-mono;
+}
+
+/* Dropdown Styles */
+.document-dropdown {
+  @apply min-w-[200px];
+  @apply bg-white dark:bg-gray-900;
+  @apply border border-gray-200 dark:border-gray-700;
+  @apply rounded-md shadow-lg;
+}
+
+.document-dropdown__item {
+  @apply flex items-start px-2 py-2;
+  @apply text-sm;
+  @apply cursor-pointer;
+  @apply transition-colors duration-150;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus:bg-gray-100 dark:focus:bg-gray-800;
+  @apply rounded-sm mx-1;
+}
+
+.document-dropdown__item--danger {
+  @apply text-red-600 dark:text-red-400;
+  @apply hover:bg-red-50 dark:hover:bg-red-900/20;
+  @apply focus:bg-red-50 dark:focus:bg-red-900/20;
+}
+
+.document-dropdown__item--danger svg {
+  @apply text-red-500 dark:text-red-400;
+}
+
+/* Stats section */
+.document-dropdown .text-muted-foreground {
+  @apply text-gray-500 dark:text-gray-400;
+}
+
+/* Document-related styles in editor */
+.ProseMirror .document-content {
+  @apply min-h-[200px];
+  @apply p-4;
+  @apply bg-white dark:bg-gray-900;
+  @apply border border-gray-200 dark:border-gray-700;
+  @apply rounded-lg;
+  @apply focus-within:ring-2 focus-within:ring-blue-500;
+  @apply transition-all duration-200;
+}
+
+.ProseMirror .document-content:empty::before {
+  content: "Comienza a escribir aquí...";
+  @apply text-gray-400 dark:text-gray-500;
+  @apply pointer-events-none;
+  @apply absolute;
+}
+
+/* Document structure indicators */
+.ProseMirror .document-structure {
+  @apply border-l-4 border-blue-200 dark:border-blue-700;
+  @apply pl-4 ml-2;
+  @apply transition-colors duration-200;
+}
+
+.ProseMirror .document-structure:hover {
+  @apply border-blue-300 dark:border-blue-600;
+}
+
+/* Character and word count display */
+.document-stats {
+  @apply fixed bottom-4 right-4;
+  @apply bg-white dark:bg-gray-800;
+  @apply border border-gray-200 dark:border-gray-700;
+  @apply rounded-lg px-3 py-2;
+  @apply text-xs text-gray-600 dark:text-gray-300;
+  @apply shadow-lg;
+  @apply transition-all duration-200;
+  @apply opacity-0 pointer-events-none;
+}
+
+.document-stats.visible {
+  @apply opacity-100 pointer-events-auto;
+}
+
+/* Focus mode for document */
+.document-focus-mode .document-content {
+  @apply mx-auto max-w-3xl;
+  @apply shadow-xl;
+  @apply bg-white dark:bg-gray-900;
+}
+
+.document-focus-mode .ProseMirror {
+  @apply focus:outline-none;
+  @apply text-gray-800 dark:text-gray-200;
+  @apply leading-relaxed;
+}
+
+/* Dark mode adjustments */
+.dark .document-button {
+  @apply text-gray-200;
+}
+
+.dark .document-button:hover {
+  @apply text-white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .document-button {
+    @apply text-xs;
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .document-dropdown {
+    @apply min-w-[180px];
+  }
+  
+  .document-dropdown__item {
+    @apply px-2 py-1.5 text-xs;
+  }
+}
+
+/* Animation for document actions */
+@keyframes document-action {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.document-action-animate {
+  animation: document-action 0.3s ease-in-out;
+}

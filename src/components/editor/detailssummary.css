@@ -1,0 +1,153 @@
+/* DetailsSummaryButton Component Styles */
+.details-summary-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.details-summary-button:hover {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+.details-summary-button--active {
+  @apply bg-orange-100 dark:bg-orange-900/30;
+  @apply border-orange-200 dark:border-orange-800;
+  @apply text-orange-700 dark:text-orange-300;
+  @apply shadow-sm;
+}
+
+.details-summary-button--active:hover {
+  @apply bg-orange-200 dark:bg-orange-800/40;
+}
+
+.details-summary-button:disabled {
+  @apply bg-gray-50 dark:bg-gray-900;
+  @apply text-gray-400 dark:text-gray-600;
+  @apply border-gray-200 dark:border-gray-800;
+  @apply cursor-not-allowed;
+}
+
+/* Tooltip Styles */
+.details-summary-tooltip {
+  @apply text-center;
+}
+
+.details-summary-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.details-summary-tooltip__shortcut {
+  @apply text-xs text-gray-500 dark:text-gray-400;
+  @apply bg-gray-100 dark:bg-gray-800;
+  @apply px-2 py-1 rounded;
+  @apply font-mono;
+  @apply mb-1;
+}
+
+.details-summary-tooltip__note {
+  @apply text-xs text-orange-600 dark:text-orange-400;
+  @apply font-medium;
+  @apply italic;
+}
+
+/* Details Summary Element Styles in Editor */
+.ProseMirror [data-type="detailsSummary"] {
+  @apply font-semibold text-gray-900 dark:text-gray-100;
+  @apply bg-gray-50 dark:bg-gray-800;
+  @apply px-3 py-2;
+  @apply border-b border-gray-200 dark:border-gray-700;
+  @apply cursor-pointer;
+  @apply transition-all duration-200;
+  @apply rounded-t-lg;
+  @apply outline-none;
+  margin-bottom: 0;
+}
+
+.ProseMirror [data-type="detailsSummary"]:hover {
+  @apply bg-gray-100 dark:bg-gray-700;
+}
+
+.ProseMirror [data-type="detailsSummary"]:focus {
+  @apply bg-gray-100 dark:bg-gray-700;
+  @apply ring-2 ring-orange-500 ring-inset;
+}
+
+.ProseMirror [data-type="detailsSummary"]::before {
+  content: "▶";
+  @apply mr-2 text-gray-500 dark:text-gray-400;
+  @apply transition-transform duration-200;
+  @apply inline-block;
+  @apply select-none;
+}
+
+.ProseMirror details[open] [data-type="detailsSummary"]::before {
+  transform: rotate(90deg);
+}
+
+/* Placeholder for empty summary */
+.ProseMirror [data-type="detailsSummary"]:empty::after {
+  content: "Haz clic para agregar un resumen...";
+  @apply text-gray-400 dark:text-gray-500;
+  @apply italic;
+  @apply pointer-events-none;
+}
+
+/* Focus states for better accessibility */
+.ProseMirror [data-type="detailsSummary"]:focus-within {
+  @apply ring-2 ring-orange-500 ring-offset-1;
+}
+
+/* Animation for summary interaction */
+.ProseMirror [data-type="detailsSummary"] {
+  animation: summary-highlight 0.3s ease-in-out;
+}
+
+@keyframes summary-highlight {
+  0% {
+    background-color: theme('colors.orange.100');
+  }
+  100% {
+    background-color: theme('colors.gray.50');
+  }
+}
+
+.dark .ProseMirror [data-type="detailsSummary"] {
+  animation: summary-highlight-dark 0.3s ease-in-out;
+}
+
+@keyframes summary-highlight-dark {
+  0% {
+    background-color: theme('colors.orange.900/30');
+  }
+  100% {
+    background-color: theme('colors.gray.800');
+  }
+}
+
+/* Dark mode adjustments */
+.dark .details-summary-button {
+  @apply text-gray-200;
+}
+
+.dark .details-summary-button:hover {
+  @apply text-white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .details-summary-button {
+    @apply text-xs;
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .ProseMirror [data-type="detailsSummary"] {
+    @apply px-2 py-1 text-sm;
+  }
+}

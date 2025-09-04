@@ -1,0 +1,79 @@
+/* ParagraphButton Component Styles */
+.paragraph-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.paragraph-button:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+.paragraph-button--active {
+  @apply bg-blue-100 dark:bg-blue-900/30;
+  @apply border-blue-200 dark:border-blue-800;
+  @apply text-blue-700 dark:text-blue-300;
+  @apply shadow-sm;
+}
+
+/* Tooltip Styles */
+.paragraph-tooltip {
+  @apply text-center;
+}
+
+.paragraph-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.paragraph-tooltip__shortcut {
+  @apply text-xs text-muted-foreground;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .paragraph-button {
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+/* TipTap Editor Paragraph Styles - Based on Official Examples */
+.tiptap p {
+  margin: 1.25rem 0;
+  line-height: 1.6;
+}
+
+.tiptap p:first-child {
+  margin-top: 0;
+}
+
+.tiptap p:last-child {
+  margin-bottom: 0;
+}
+
+/* Empty paragraph styling */
+.tiptap p.is-editor-empty:first-child::before {
+  @apply text-gray-400 dark:text-gray-600;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Selection styling */
+.tiptap p.ProseMirror-selectednode {
+  @apply outline outline-2 outline-blue-500 outline-offset-2;
+  @apply bg-blue-50 dark:bg-blue-900/20;
+  @apply rounded;
+}
+
+/* Dark mode adjustments */
+.dark .tiptap p {
+  @apply text-gray-100;
+}

@@ -1,0 +1,100 @@
+/* Mention Button Styles */
+.mention-button {
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-accent hover:text-accent-foreground;
+  @apply focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.mention-button:hover {
+  @apply transform scale-105;
+}
+
+.mention-button:active {
+  @apply transform scale-95;
+}
+
+/* Mention Tooltip Styles */
+.mention-tooltip {
+  @apply text-center;
+}
+
+.mention-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.mention-tooltip__shortcut {
+  @apply text-xs text-muted-foreground;
+}
+
+/* Editor Mention Styles - Enhanced from official examples */
+.tiptap {
+  .mention {
+    @apply inline-block;
+    @apply bg-primary/10 text-primary;
+    @apply rounded px-1.5 py-0.5;
+    @apply font-medium;
+    @apply decoration-primary;
+    @apply cursor-pointer;
+    @apply transition-colors duration-150;
+    
+    /* Espacio después del elemento mention para evitar que se pegue al texto siguiente */
+    &::after {
+      content: "\200B"; /* Zero-width space */
+    }
+    
+    /* Efectos hover */
+    &:hover {
+      @apply bg-primary/20;
+    }
+    
+    /* Estilo cuando está seleccionado en el editor */
+    &.ProseMirror-selectednode {
+      @apply outline outline-2 outline-primary outline-offset-1;
+    }
+  }
+}
+
+/* Dark mode adjustments */
+.dark .tiptap .mention {
+  @apply bg-primary/20 text-primary-foreground;
+  
+  &:hover {
+    @apply bg-primary/30;
+  }
+}
+
+/* Mention Dropdown Styles */
+.mention-dropdown-button {
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-accent hover:text-accent-foreground;
+  @apply focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.mention-dropdown-button[data-state="open"] {
+  @apply bg-accent text-accent-foreground;
+}
+
+.mention-dropdown-content {
+  @apply w-56;
+  max-height: 50vh !important;
+  overflow-y: auto !important;
+  z-index: 999 !important;
+  position: fixed !important;
+}
+
+.mention-dropdown-label {
+  @apply font-medium text-sm px-2 py-1.5;
+}
+
+.mention-dropdown-item {
+  @apply cursor-pointer transition-colors;
+  @apply hover:bg-accent hover:text-accent-foreground;
+  @apply focus:bg-accent focus:text-accent-foreground;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.mention-dropdown-item:hover {
+  @apply transform scale-[1.02];
+}

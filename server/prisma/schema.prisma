@@ -1,0 +1,200 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Area {
+  id                 String              @id @default(uuid())
+  name               String              @unique
+  description        String?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  areaDocumentShares AreaDocumentShare[]
+  users              User[]
+
+  @@map("areas")
+}
+
+model User {
+  id                     String           @id @default(cuid())
+  email                  String           @unique
+  firstName              String?
+  lastName               String?
+  imageUrl               String?
+  createdAt              DateTime         @default(now())
+  updatedAt              DateTime         @updatedAt
+  username               String?          @unique
+  areaId                 String?
+  isLeader               Boolean          @default(false)
+  role                   String           @default("normal")
+  emailVerificationToken String?
+  emailVerificationExpires DateTime?
+  emailVerified          Boolean          @default(false)
+  isActive               Boolean          @default(true)
+  lastLoginAt            DateTime?
+  password               String
+  passwordResetExpires   DateTime?
+  passwordResetToken     String?
+  authSessions           AuthSession[]
+  categories             Category[]
+  categoryShares         CategoryShare[]
+  documentShares         DocumentShare[]
+  documents              Document[]
+  userPermissions        UserPermission[]
+  area                   Area?            @relation(fields: [areaId], references: [id])
+
+  @@index([email])
+  @@index([username])
+  @@index([areaId])
+  @@index([role])
+  @@index([emailVerificationToken])
+  @@index([passwordResetToken])
+  @@map("users")
+}
+
+model UserPermission {
+  id         String   @id @default(uuid())
+  userId     String
+  permission String
+  grantedBy  String
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, permission])
+  @@map("user_permissions")
+}
+
+model Category {
+  id             String          @id @default(uuid())
+  name           String
+  description    String?
+  parentId       String?
+  userId         String
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  deletedAt      DateTime?
+  deletedBy      String?
+  deletionReason String?
+  isDeleted      Boolean         @default(false)
+  parent         Category?       @relation("CategoryToCategory", fields: [parentId], references: [id])
+  subcategories  Category[]      @relation("CategoryToCategory")
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shares         CategoryShare[]
+  documents      Document[]
+
+  @@unique([name, userId, parentId])
+  @@index([userId])
+  @@index([parentId])
+  @@index([isDeleted])
+  @@map("categories")
+}
+
+model Document {
+  id             String              @id @default(uuid())
+  title          String
+  content        String
+  categoryId     String?
+  userId         String
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  deletedAt      DateTime?
+  deletedBy      String?
+  deletionReason String?
+  isDeleted      Boolean             @default(false)
+  areaShares     AreaDocumentShare[]
+  shares         DocumentShare[]
+  versions       DocumentVersion[]
+  category       Category?           @relation(fields: [categoryId], references: [id])
+  user           User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([categoryId])
+  @@index([createdAt])
+  @@index([isDeleted])
+  @@map("documents")
+}
+
+model DocumentVersion {
+  id         String   @id @default(uuid())
+  documentId String
+  version    Int
+  title      String
+  content    String
+  changeNote String?
+  createdBy  String
+  createdAt  DateTime @default(now())
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@unique([documentId, version])
+  @@index([documentId])
+  @@index([createdAt])
+  @@map("document_versions")
+}
+
+model DocumentShare {
+  id         String   @id @default(uuid())
+  documentId String
+  sharedWith String
+  permission String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [sharedWith], references: [id], onDelete: Cascade)
+
+  @@unique([documentId, sharedWith])
+  @@map("document_shares")
+}
+
+model AreaDocumentShare {
+  id         String   @id @default(uuid())
+  documentId String
+  areaId     String?
+  permission String
+  createdAt  DateTime @default(now())
+  area       Area?    @relation(fields: [areaId], references: [id], onDelete: Cascade)
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@unique([documentId, areaId])
+  @@map("area_document_shares")
+}
+
+model CategoryShare {
+  id         String   @id @default(uuid())
+  categoryId String
+  sharedWith String
+  permission String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [sharedWith], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, sharedWith])
+  @@map("category_shares")
+}
+
+model AuthSession {
+  id           String   @id @default(uuid())
+  userId       String
+  token        String   @unique
+  refreshToken String?  @unique
+  deviceInfo   String?
+  ipAddress    String?
+  userAgent    String?
+  expiresAt    DateTime
+  lastUsedAt   DateTime @default(now())
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([token])
+  @@index([refreshToken])
+  @@index([expiresAt])
+  @@index([isActive])
+  @@map("auth_sessions")
+}

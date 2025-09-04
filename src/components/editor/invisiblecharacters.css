@@ -1,0 +1,32 @@
+/* InvisibleCharacters Button Styles */
+.invisible-characters-button {
+  transition: all 0.15s ease;
+}
+
+.invisible-characters-button.is-active {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.invisible-characters-button:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* InvisibleCharacters Dropdown Styles */
+.invisible-characters-dropdown-content {
+  width: 280px;
+  padding: 8px;
+}
+
+.invisible-characters-dropdown-content .is-selected {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .invisible-characters-dropdown-content {
+    width: 260px;
+  }
+}

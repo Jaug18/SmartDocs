@@ -1,0 +1,174 @@
+/* DetailsContentButton Component Styles */
+.details-content-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.details-content-button:hover {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+.details-content-button--active {
+  @apply bg-green-100 dark:bg-green-900/30;
+  @apply border-green-200 dark:border-green-800;
+  @apply text-green-700 dark:text-green-300;
+  @apply shadow-sm;
+}
+
+.details-content-button--active:hover {
+  @apply bg-green-200 dark:bg-green-800/40;
+}
+
+.details-content-button:disabled {
+  @apply opacity-40 cursor-not-allowed;
+  @apply bg-gray-50 dark:bg-gray-900;
+  @apply text-gray-400 dark:text-gray-600;
+}
+
+/* Dropdown Menu Styles */
+.details-content-menu-item {
+  @apply cursor-pointer;
+  @apply transition-colors duration-150;
+  @apply flex items-center p-2;
+}
+
+.details-content-menu-item:hover {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+.details-content-menu-item:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.details-content-menu-item:disabled:hover {
+  @apply bg-transparent;
+}
+
+/* Tooltip Styles */
+.details-content-tooltip {
+  @apply text-center;
+}
+
+.details-content-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.details-content-tooltip__shortcut {
+  @apply text-xs text-gray-500 dark:text-gray-400;
+  @apply bg-gray-100 dark:bg-gray-800;
+  @apply px-2 py-1 rounded;
+  @apply font-mono;
+}
+
+/* Enhanced Details Content Styles in Editor */
+.ProseMirror [data-type="detailsContent"] {
+  @apply min-h-8;
+  @apply p-2;
+  @apply border-l-4 border-green-200 dark:border-green-700;
+  @apply bg-green-50 dark:bg-green-950/20;
+  @apply rounded-r-md;
+  @apply transition-all duration-200;
+}
+
+.ProseMirror [data-type="detailsContent"]:hover {
+  @apply border-green-300 dark:border-green-600;
+  @apply bg-green-100 dark:bg-green-950/30;
+}
+
+.ProseMirror [data-type="detailsContent"]:focus-within {
+  @apply ring-2 ring-green-500 ring-offset-2;
+  @apply border-green-400 dark:border-green-500;
+}
+
+.ProseMirror [data-type="detailsContent"] > *:first-child {
+  @apply mt-0;
+}
+
+.ProseMirror [data-type="detailsContent"] > *:last-child {
+  @apply mb-0;
+}
+
+/* Details Summary enhanced styles */
+.ProseMirror [data-type="detailsSummary"] {
+  @apply font-semibold;
+  @apply border-l-4 border-blue-200 dark:border-blue-700;
+  @apply bg-blue-50 dark:bg-blue-950/20;
+  @apply p-2 rounded-r-md;
+  @apply transition-all duration-200;
+}
+
+.ProseMirror [data-type="detailsSummary"]:hover {
+  @apply border-blue-300 dark:border-blue-600;
+  @apply bg-blue-100 dark:bg-blue-950/30;
+}
+
+.ProseMirror [data-type="detailsSummary"]:focus {
+  @apply ring-2 ring-blue-500 ring-offset-2;
+  @apply border-blue-400 dark:border-blue-500;
+}
+
+/* Nested details content styling */
+.ProseMirror .details-element [data-type="detailsContent"] {
+  @apply ml-4;
+  @apply border-l-2;
+}
+
+.ProseMirror .details-element [data-type="detailsSummary"] {
+  @apply cursor-pointer;
+}
+
+/* Animation for content transitions */
+.ProseMirror [data-type="detailsContent"] {
+  animation: details-content-show 0.25s ease-in-out;
+}
+
+@keyframes details-content-show {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Dark mode adjustments */
+.dark .details-content-button {
+  @apply text-gray-200;
+}
+
+.dark .details-content-button:hover {
+  @apply text-white;
+}
+
+/* State indicators */
+.details-content-button[data-state="active"] {
+  @apply bg-green-100 dark:bg-green-900/30;
+  @apply text-green-700 dark:text-green-300;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .details-content-button {
+    @apply text-xs;
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .details-content-menu-item {
+    @apply p-1.5 text-sm;
+  }
+  
+  .ProseMirror [data-type="detailsContent"],
+  .ProseMirror [data-type="detailsSummary"] {
+    @apply p-1.5 text-sm;
+  }
+}

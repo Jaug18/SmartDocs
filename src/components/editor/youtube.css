@@ -1,0 +1,234 @@
+/* YoutubeButton Component Styles */
+.youtube-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.youtube-button:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+/* Active state */
+.youtube-button.bg-accent {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Youtube Dropdown Styles */
+.youtube-dropdown-content {
+  @apply w-52;
+  max-height: 50vh !important;
+  overflow-y: auto !important;
+  z-index: 999 !important;
+  position: fixed !important;
+}
+
+.youtube-dropdown-label {
+  @apply font-medium text-sm px-2 py-1.5;
+  @apply border-b border-border;
+}
+
+.youtube-dropdown-item {
+  @apply cursor-pointer transition-colors;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply flex items-center gap-2;
+}
+
+.youtube-dropdown-item:hover {
+  @apply transform scale-[1.02];
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.youtube-dropdown-item:focus {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Icon styling within dropdown items */
+.youtube-dropdown-item svg {
+  @apply w-4 h-4 flex-shrink-0;
+}
+
+/* URL Input Styling */
+.youtube-url-input {
+  @apply transition-all duration-200;
+}
+
+.youtube-url-input:focus {
+  @apply ring-2 ring-red-500/30 border-red-500;
+}
+
+/* Tooltip Styles */
+.youtube-tooltip {
+  @apply text-center;
+}
+
+.youtube-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.youtube-tooltip__shortcut {
+  @apply text-xs text-muted-foreground;
+}
+
+.youtube-tooltip kbd {
+  @apply inline-flex items-center justify-center rounded border border-border bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .youtube-button {
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .youtube-dropdown-content {
+    @apply w-48;
+  }
+}
+
+/* Enhanced YouTube embed styles for TipTap editor */
+.tiptap div[data-youtube-video] {
+  @apply my-4 rounded-lg overflow-hidden;
+  @apply cursor-pointer;
+  @apply transition-all duration-200;
+  position: relative;
+  display: block;
+  max-width: 100%;
+}
+
+.tiptap div[data-youtube-video]:hover {
+  @apply shadow-md;
+  transform: translateY(-1px);
+}
+
+.tiptap div[data-youtube-video] iframe {
+  @apply w-full h-auto;
+  border: none;
+  display: block;
+  min-height: 200px;
+  min-width: 200px;
+  border-radius: 8px;
+  @apply transition-all duration-200;
+}
+
+.tiptap div[data-youtube-video].ProseMirror-selectednode {
+  @apply outline-2 outline-red-500/50 outline-dashed outline-offset-2;
+  @apply shadow-lg;
+}
+
+.tiptap div[data-youtube-video].ProseMirror-selectednode iframe {
+  @apply ring-2 ring-red-500/30;
+}
+
+/* YouTube video overlay for better UX */
+.tiptap div[data-youtube-video]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 8px;
+}
+
+.tiptap div[data-youtube-video]:hover::before {
+  background: rgba(255, 0, 0, 0.05);
+}
+
+/* Loading state for YouTube embeds */
+.tiptap div[data-youtube-video].loading {
+  @apply bg-gray-100 dark:bg-gray-800;
+  @apply animate-pulse;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tiptap div[data-youtube-video].loading::after {
+  content: '🎥 Cargando video...';
+  @apply text-gray-500 dark:text-gray-400;
+  @apply text-sm;
+}
+
+/* Responsive YouTube embeds */
+@media (max-width: 768px) {
+  .tiptap div[data-youtube-video] {
+    @apply mx-auto;
+    max-width: 100%;
+  }
+  
+  .tiptap div[data-youtube-video] iframe {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16/9;
+  }
+}
+
+/* Dark mode enhancements */
+.dark .youtube-button {
+  @apply hover:bg-gray-800;
+}
+
+.dark .youtube-dropdown-content {
+  @apply border-gray-600;
+}
+
+.dark .tiptap div[data-youtube-video]:hover::before {
+  background: rgba(255, 0, 0, 0.1);
+}
+
+/* Accessibility improvements */
+.youtube-button:focus-visible {
+  @apply ring-2 ring-red-500/50 ring-offset-2;
+}
+
+.tiptap div[data-youtube-video]:focus-within {
+  @apply outline-2 outline-red-500/30 outline-dashed outline-offset-2;
+}
+
+/* Animation for new YouTube embeds */
+@keyframes youtube-embed-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.tiptap div[data-youtube-video].new-embed {
+  animation: youtube-embed-in 0.3s ease-out forwards;
+}
+
+/* Error state styling */
+.tiptap div[data-youtube-video].error {
+  @apply bg-red-50 dark:bg-red-900/20;
+  @apply border-2 border-red-200 dark:border-red-800;
+  @apply text-red-600 dark:text-red-400;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.tiptap div[data-youtube-video].error::after {
+  content: '❌ Error al cargar el video';
+  @apply text-sm font-medium;
+}

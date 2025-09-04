@@ -1,0 +1,136 @@
+/* SubscriptButton Component Styles */
+.subscript-button,
+.subscript-toggle {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.subscript-button:hover:not(:disabled),
+.subscript-toggle:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+/* Active state for toggle */
+.subscript-toggle--active,
+.subscript-toggle[data-state="on"] {
+  @apply bg-accent text-accent-foreground;
+  font-size: 0.85em;
+  vertical-align: sub;
+}
+
+/* Active state for button */
+.subscript-button.bg-accent {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  font-size: 0.85em;
+  vertical-align: sub;
+}
+
+/* Tooltip Styles */
+.subscript-tooltip {
+  @apply text-center;
+}
+
+.subscript-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.subscript-tooltip__shortcut {
+  @apply text-xs text-muted-foreground;
+}
+
+.subscript-tooltip kbd {
+  @apply inline-flex items-center justify-center rounded border border-border bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .subscript-button,
+  .subscript-toggle {
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+/* Enhanced Subscript text styles for TipTap editor */
+.tiptap sub {
+  vertical-align: sub;
+  font-size: 0.75em;
+  line-height: 1;
+  @apply transition-all duration-150;
+  @apply text-indigo-600 dark:text-indigo-400;
+}
+
+.tiptap sub:hover {
+  @apply text-indigo-700 dark:text-indigo-300;
+  @apply shadow-sm;
+  transform: translateY(1px);
+}
+
+.tiptap sub:focus {
+  @apply outline-2 outline-indigo-500/50 outline-offset-1;
+  @apply rounded;
+}
+
+/* Chemical formulas */
+.tiptap .chemical sub {
+  @apply text-gray-700 dark:text-gray-300;
+  font-family: "Times New Roman", serif;
+}
+
+/* Mathematical expressions */
+.tiptap .math sub {
+  @apply text-blue-600 dark:text-blue-400;
+  font-family: "Computer Modern", "Times New Roman", serif;
+}
+
+/* Dark mode enhancements */
+.dark .subscript-button,
+.dark .subscript-toggle {
+  @apply hover:bg-gray-800;
+}
+
+/* Accessibility improvements */
+.subscript-button:focus-visible,
+.subscript-toggle:focus-visible {
+  @apply ring-2 ring-indigo-500/50 ring-offset-2;
+}
+
+/* Animation for subscript text application */
+@keyframes subscript-apply {
+  0% {
+    vertical-align: baseline;
+    font-size: 1em;
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(2px) scale(0.9);
+  }
+  100% {
+    vertical-align: sub;
+    font-size: 0.75em;
+    transform: translateY(0);
+  }
+}
+
+.tiptap sub.new-subscript {
+  animation: subscript-apply 0.3s ease-out forwards;
+}
+
+/* Prevent subscript from affecting line height too much */
+.tiptap p:has(sub) {
+  line-height: 1.6;
+}
+
+/* Better rendering for complex subscripts */
+.tiptap sub sup {
+  vertical-align: top;
+  font-size: 0.9em;
+}

@@ -1,0 +1,117 @@
+/* UnderlineButton Component Styles */
+.underline-button,
+.underline-toggle {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.underline-button:hover:not(:disabled),
+.underline-toggle:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+/* Active state for toggle */
+.underline-toggle--active,
+.underline-toggle[data-state="on"] {
+  @apply bg-accent text-accent-foreground;
+  text-decoration: underline;
+}
+
+/* Active state for button */
+.underline-button.bg-accent {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  text-decoration: underline;
+}
+
+/* Tooltip Styles */
+.underline-tooltip {
+  @apply text-center;
+}
+
+.underline-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.underline-tooltip__shortcut {
+  @apply text-xs text-muted-foreground;
+}
+
+.underline-tooltip kbd {
+  @apply inline-flex items-center justify-center rounded border border-border bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground;
+}
+
+/* Dark mode support */
+.dark .underline-button,
+.dark .underline-toggle {
+  @apply hover:bg-gray-800;
+}
+
+.dark .underline-toggle--active {
+  @apply bg-accent text-accent-foreground;
+}
+
+/* Accessibility improvements */
+.underline-button:focus-visible,
+.underline-toggle:focus-visible {
+  @apply ring-2 ring-offset-2 ring-offset-background;
+}
+
+/* Animation for active state */
+.underline-toggle--active .lucide-underline,
+.underline-button.bg-accent .lucide-underline {
+  animation: underline-pulse 0.3s ease-in-out;
+}
+
+@keyframes underline-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .underline-button,
+  .underline-toggle {
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .underline-button,
+  .underline-toggle {
+    @apply border-2 border-solid border-current;
+  }
+  
+  .underline-toggle--active {
+    @apply bg-foreground text-background;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .underline-button,
+  .underline-toggle {
+    transition: none;
+  }
+  
+  .underline-toggle--active .lucide-underline,
+  .underline-button.bg-accent .lucide-underline {
+    animation: none;
+  }
+}

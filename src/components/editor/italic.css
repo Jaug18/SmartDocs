@@ -1,0 +1,102 @@
+/* ItalicButton Component Styles */
+.italic-button,
+.italic-toggle {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.italic-button:hover:not(:disabled),
+.italic-toggle:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+/* Active state for toggle */
+.italic-toggle--active,
+.italic-toggle[data-state="on"] {
+  @apply bg-accent text-accent-foreground;
+  @apply italic;
+}
+
+/* Active state for button */
+.italic-button.bg-accent {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  @apply italic;
+}
+
+/* Tooltip Styles */
+.italic-tooltip {
+  @apply text-center;
+}
+
+.italic-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.italic-tooltip__shortcut {
+  @apply text-xs text-muted-foreground;
+}
+
+.italic-tooltip kbd {
+  @apply inline-flex items-center justify-center rounded border border-border bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .italic-button,
+  .italic-toggle {
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+/* Enhanced Italic text styles for TipTap editor */
+.tiptap em,
+.tiptap i {
+  font-style: italic;
+  @apply transition-all duration-150;
+}
+
+.tiptap em:hover,
+.tiptap i:hover {
+  @apply text-primary;
+}
+
+/* Dark mode enhancements */
+.dark .italic-button,
+.dark .italic-toggle {
+  @apply hover:bg-gray-800;
+}
+
+/* Accessibility improvements */
+.italic-button:focus-visible,
+.italic-toggle:focus-visible {
+  @apply ring-2 ring-blue-500/50 ring-offset-2;
+}
+
+/* Animation for italic text application */
+@keyframes italic-apply {
+  0% {
+    font-style: normal;
+    transform: scale(1) skewX(0deg);
+  }
+  50% {
+    transform: scale(1.02) skewX(-2deg);
+  }
+  100% {
+    font-style: italic;
+    transform: scale(1) skewX(0deg);
+  }
+}
+
+.tiptap em.new-italic,
+.tiptap i.new-italic {
+  animation: italic-apply 0.2s ease-out forwards;
+}

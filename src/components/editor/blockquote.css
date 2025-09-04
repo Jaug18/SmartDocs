@@ -1,0 +1,42 @@
+/* Blockquote styles for TipTap editor */
+.tiptap :first-child {
+  margin-top: 0;
+}
+
+.tiptap blockquote {
+  border-left: 3px solid hsl(var(--border));
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+  color: hsl(var(--muted-foreground));
+  font-style: italic;
+  background-color: hsl(var(--muted) / 0.1);
+  border-radius: 0 4px 4px 0;
+}
+
+.tiptap blockquote p {
+  margin: 0.5rem 0;
+}
+
+.tiptap blockquote p:first-child {
+  margin-top: 0;
+}
+
+.tiptap blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .tiptap blockquote {
+    border-left-color: hsl(var(--border));
+    background-color: hsl(var(--muted) / 0.2);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tiptap blockquote {
+    margin: 1rem 0;
+    padding-left: 0.75rem;
+  }
+}

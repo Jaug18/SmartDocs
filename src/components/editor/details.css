@@ -1,0 +1,144 @@
+/* DetailsButton Component Styles */
+.details-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.details-button:hover {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+.details-button--active {
+  @apply bg-blue-100 dark:bg-blue-900/30;
+  @apply border-blue-200 dark:border-blue-800;
+  @apply text-blue-700 dark:text-blue-300;
+  @apply shadow-sm;
+}
+
+.details-button--active:hover {
+  @apply bg-blue-200 dark:bg-blue-800/40;
+}
+
+/* Tooltip Styles */
+.details-tooltip {
+  @apply text-center;
+}
+
+.details-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.details-tooltip__shortcut {
+  @apply text-xs text-gray-500 dark:text-gray-400;
+  @apply bg-gray-100 dark:bg-gray-800;
+  @apply px-2 py-1 rounded;
+  @apply font-mono;
+}
+
+/* Details Element Styles in Editor */
+.ProseMirror .details-element {
+  @apply border border-gray-200 dark:border-gray-700;
+  @apply rounded-lg my-4;
+  @apply transition-all duration-200;
+}
+
+.ProseMirror .details-element:hover {
+  @apply border-gray-300 dark:border-gray-600;
+  @apply shadow-sm;
+}
+
+.ProseMirror .details-element[data-details-open="true"] {
+  @apply border-blue-200 dark:border-blue-700;
+  @apply shadow-md;
+}
+
+.ProseMirror .details-summary {
+  @apply cursor-pointer p-3;
+  @apply bg-gray-50 dark:bg-gray-800;
+  @apply font-medium select-none;
+  @apply transition-all duration-200;
+  @apply border-none outline-none;
+  @apply rounded-t-lg;
+  @apply flex items-center justify-between;
+}
+
+.ProseMirror .details-summary:hover {
+  @apply bg-gray-100 dark:bg-gray-700;
+}
+
+.ProseMirror .details-summary:focus {
+  @apply bg-gray-100 dark:bg-gray-700;
+  @apply ring-2 ring-blue-500 ring-inset;
+}
+
+.ProseMirror .details-summary::before {
+  content: "▶";
+  @apply mr-2 text-gray-500 dark:text-gray-400;
+  @apply transition-transform duration-200;
+  @apply inline-block;
+}
+
+.ProseMirror details[open] .details-summary::before {
+  transform: rotate(90deg);
+}
+
+.ProseMirror .details-content {
+  @apply p-3;
+  @apply border-t border-gray-200 dark:border-gray-700;
+  @apply rounded-b-lg;
+  @apply bg-white dark:bg-gray-900;
+}
+
+/* Focus states for better accessibility */
+.ProseMirror .details-element:focus-within {
+  @apply ring-2 ring-blue-500 ring-offset-2;
+}
+
+/* Animation for content reveal */
+.ProseMirror details .details-content {
+  animation: details-show 0.2s ease-in-out;
+}
+
+@keyframes details-show {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dark mode adjustments */
+.dark .details-button {
+  @apply text-gray-200;
+}
+
+.dark .details-button:hover {
+  @apply text-white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .details-button {
+    @apply text-xs;
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .ProseMirror .details-summary {
+    @apply p-2 text-sm;
+  }
+  
+  .ProseMirror .details-content {
+    @apply p-2;
+  }
+}

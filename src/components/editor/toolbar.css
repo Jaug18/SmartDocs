@@ -1,0 +1,444 @@
+/* CSS específico para el EditorToolbar */
+
+/* Asegurar posicionamiento correcto de tooltips dentro del toolbar */
+.editor-toolbar-container [data-radix-tooltip-trigger] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.editor-toolbar-container [data-radix-tooltip-content] {
+  position: fixed !important;
+  z-index: 9999 !important;
+  pointer-events: none !important;
+}
+
+/* Asegurar que los botones dentro de tooltips mantengan su posicionamiento */
+.editor-toolbar-container button,
+.editor-toolbar-container [data-radix-tooltip-trigger] {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Prevenir que los tooltips hereden transformaciones del contenedor */
+.editor-toolbar-container [data-radix-tooltip-content] {
+  transform-origin: center !important;
+}
+
+/* Forzar ancho completo en las pestañas */
+.editor-tabs-list {
+  display: flex !important;
+  width: 100% !important;
+  justify-content: stretch !important;
+  border-radius: 0.375rem 0.375rem 0 0 !important; /* Bordes redondeados más pequeños */
+  margin: 0 !important; /* Sin margen para contener completamente */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* Sombra sutil */
+  background: linear-gradient(135deg, hsl(var(--muted)) 0%, hsl(var(--muted) / 0.8) 100%); /* Gradiente sutil */
+  border: 1px solid hsl(var(--border) / 0.5); /* Borde sutil */
+  border-bottom: none; /* Sin borde inferior para conectar con el contenido */
+  height: 36px !important; /* Altura reducida */
+}
+
+.editor-tabs-trigger {
+  flex: 1 !important;
+  min-width: 0 !important;
+  border-radius: 0.25rem !important; /* Bordes redondeados más pequeños */
+  justify-content: center !important;
+  white-space: nowrap !important;
+  margin: 0.0625rem; /* Márgenes más pequeños */
+  transition: all 0.2s ease-in-out; /* Transición suave */
+  border: 1px solid transparent; /* Borde transparente por defecto */
+  position: relative;
+  overflow: hidden;
+  height: 30px !important; /* Altura fija más pequeña */
+  padding: 0.25rem 0.5rem !important; /* Padding reducido */
+}
+
+.editor-tabs-trigger::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent 0%, hsl(var(--primary) / 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.editor-tabs-trigger:hover {
+  background-color: hsl(var(--accent)) !important;
+  transform: translateY(-1px); /* Efecto de elevación sutil */
+  border-color: hsl(var(--border)); /* Borde visible en hover */
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1); /* Sombra en hover */
+}
+
+.editor-tabs-trigger:hover::before {
+  opacity: 1;
+}
+
+.editor-tabs-trigger[data-state="active"] {
+  background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--accent) / 0.3) 100%) !important;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15) !important;
+  border-color: hsl(var(--primary) / 0.3) !important;
+  border-bottom: 2px solid hsl(var(--primary)) !important;
+  transform: translateY(-1px);
+}
+
+.editor-tabs-trigger[data-state="active"]::before {
+  opacity: 1;
+}
+
+/* Asegurar que el contenedor de pestañas ocupe todo el ancho */
+.editor-toolbar-container {
+  width: 100% !important;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--muted) / 0.1) 100%);
+  border-radius: 0.375rem !important; /* Bordes redondeados más pequeños */
+  overflow: visible !important; /* Permitir que los tooltips se muestren fuera del contenedor */
+  border: 1px solid hsl(var(--border) / 0.5);
+  margin: 0.25rem; /* Margen pequeño para contener completamente */
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Contenido de pestañas con altura fija para evitar saltos */
+.editor-tabs-content {
+  min-height: 40px !important; /* Altura reducida */
+  padding: 0.5rem !important; /* Padding reducido */
+  margin-top: 0 !important;
+  background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--accent) / 0.1) 100%);
+  border-radius: 0 0 0.375rem 0.375rem !important; /* Bordes redondeados más pequeños */
+  margin: 0 !important; /* Sin margen para contener completamente */
+  box-shadow: none !important; /* Sin sombra adicional */
+  border: none !important; /* Sin borde adicional */
+  position: relative;
+  overflow: visible !important; /* Permitir que los tooltips se muestren */
+}
+
+/* Asegurar que los botones en las pestañas no se envuelvan */
+.editor-tabs-content .flex {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: visible !important; /* Permitir que los tooltips se muestren verticalmente */
+  min-width: 0;
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+  padding-bottom: 2px; /* Espacio reducido para el scrollbar */
+  gap: 0.375rem !important; /* Gap reducido */
+}
+
+/* Scrollbar personalizado para contenido que desborde */
+.editor-tabs-content .flex::-webkit-scrollbar {
+  height: 3px; /* Scrollbar más pequeño */
+}
+
+.editor-tabs-content .flex::-webkit-scrollbar-track {
+  background: hsl(var(--muted) / 0.3);
+  border-radius: 1px;
+}
+
+.editor-tabs-content .flex::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.4);
+  border-radius: 1px;
+  transition: background-color 0.2s ease;
+}
+
+.editor-tabs-content .flex::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.6);
+}
+
+/* Indicador visual de scroll */
+.editor-tabs-content .flex::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 15px; /* Indicador más pequeño */
+  background: linear-gradient(to left, hsl(var(--background)), transparent);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.editor-tabs-content:hover .flex::after {
+  opacity: 1;
+}
+
+/* Estilos para responsive */
+@media (max-width: 768px) {
+  .editor-tabs-trigger span {
+    display: none;
+  }
+  
+  .editor-tabs-trigger {
+    padding: 0.25rem 0.125rem;
+  }
+  
+  .editor-tabs-content {
+    padding: 0.375rem;
+  }
+  
+  .editor-tabs-content .gap-2 {
+    gap: 0.25rem;
+  }
+  
+  .editor-tabs-content .text-xs {
+    font-size: 0.625rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .editor-tabs-content {
+    padding: 0.25rem;
+  }
+  
+  .editor-tabs-content .gap-2 {
+    gap: 0.125rem;
+  }
+  
+  .editor-tabs-content .mx-1 {
+    margin-left: 0.125rem;
+    margin-right: 0.125rem;
+  }
+}
+
+/* Evitar que los elementos se compriman demasiado */
+.editor-tabs-content .flex > * {
+  flex-shrink: 0;
+}
+
+.editor-tabs-content .text-muted-foreground {
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-size: 0.6875rem !important; /* Texto más pequeño */
+}
+
+/* Asegurar que los botones mantengan su tamaño mínimo */
+.editor-tabs-content button {
+  min-width: 24px !important; /* Botones más pequeños */
+  min-height: 24px !important;
+}
+
+/* Separadores más pequeños */
+.editor-tabs-content .h-5 {
+  height: 1rem !important;
+}
+
+/* Estilos específicos para tooltips en el toolbar */
+.editor-toolbar-container [data-radix-tooltip-trigger] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Asegurar que los tooltips no se corten */
+.editor-tabs-content {
+  position: relative;
+  overflow: visible !important;
+}
+
+.editor-tabs-content .flex {
+  overflow-x: auto;
+  overflow-y: visible !important;
+}
+
+/* Mejorar el z-index de los tooltips dentro del toolbar */
+.editor-toolbar-container [data-radix-tooltip-content] {
+  z-index: 9999 !important;
+}
+
+/* Estilos específicos para tooltips pegados a las herramientas */
+.editor-toolbar-container [data-radix-tooltip-trigger] {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Forzar posicionamiento exacto del tooltip */
+.editor-toolbar-container [data-radix-tooltip-content] {
+  position: fixed !important;
+  z-index: 9999 !important;
+  pointer-events: none !important;
+  transform-origin: center top !important;
+  margin: 0 !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+  max-width: 200px !important;
+  word-wrap: break-word !important;
+}
+
+/* Eliminar cualquier offset adicional */
+.editor-toolbar-container [data-radix-tooltip-content][data-side="bottom"] {
+  margin-top: 2px !important;
+}
+
+.editor-toolbar-container [data-radix-tooltip-content][data-side="top"] {
+  margin-bottom: 2px !important;
+}
+
+.editor-toolbar-container [data-radix-tooltip-content][data-side="left"] {
+  margin-right: 2px !important;
+}
+
+.editor-toolbar-container [data-radix-tooltip-content][data-side="right"] {
+  margin-left: 2px !important;
+}
+
+/* Asegurar que el trigger mantenga su forma y tamaño */
+.editor-toolbar-container [data-radix-tooltip-trigger] > * {
+  pointer-events: auto !important;
+}
+
+/* Forzar posicionamiento inmediato del tooltip */
+.editor-toolbar-container .tooltip-immediate {
+  --radix-tooltip-content-transform-origin: var(--radix-popper-transform-origin);
+  --radix-tooltip-content-available-width: var(--radix-popper-available-width);
+  --radix-tooltip-content-available-height: var(--radix-popper-available-height);
+  --radix-tooltip-trigger-width: var(--radix-popper-anchor-width);
+  --radix-tooltip-trigger-height: var(--radix-popper-anchor-height);
+}
+
+/* Eliminar cualquier delay o transición que pueda afectar el posicionamiento */
+.editor-toolbar-container [data-radix-tooltip-content] {
+  animation-duration: 0.1s !important;
+  transition: none !important;
+}
+
+/* Asegurar que no hay espaciado extra en el contenedor del tooltip */
+.editor-toolbar-container [data-radix-tooltip-content] > div {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.2 !important;
+}
+
+/* Sobrescribir completamente las animaciones y posicionamiento de Radix UI para tooltips */
+.editor-toolbar-container [data-radix-tooltip-content] {
+  /* Eliminar todas las animaciones predefinidas */
+  animation: none !important;
+  transform: none !important;
+  
+  /* Posicionamiento exacto */
+  position: fixed !important;
+  z-index: 9999 !important;
+  
+  /* Estilos de apariencia compactos */
+  background: hsl(var(--popover)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 6px !important;
+  padding: 4px 8px !important;
+  font-size: 11px !important;
+  line-height: 1.3 !important;
+  color: hsl(var(--popover-foreground)) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  
+  /* Eliminar márgenes y paddings extra */
+  margin: 0 !important;
+  
+  /* Posicionamiento pegado al trigger */
+  --radix-tooltip-content-transform-origin: center !important;
+}
+
+/* Estados específicos para cada lado */
+.editor-toolbar-container [data-radix-tooltip-content][data-side="bottom"] {
+  transform: translateY(2px) !important;
+}
+
+.editor-toolbar-container [data-radix-tooltip-content][data-side="top"] {
+  transform: translateY(-2px) !important;
+}
+
+.editor-toolbar-container [data-radix-tooltip-content][data-side="left"] {
+  transform: translateX(-2px) !important;
+}
+
+.editor-toolbar-container [data-radix-tooltip-content][data-side="right"] {
+  transform: translateX(2px) !important;
+}
+
+/* Deshabilitar tooltips internos de componentes modulares dentro del toolbar */
+.editor-toolbar-container [data-radix-tooltip-trigger]:not(.toolbar-tooltip-trigger) {
+  pointer-events: auto !important;
+}
+
+.editor-toolbar-container [data-radix-tooltip-trigger]:not(.toolbar-tooltip-trigger) [data-radix-tooltip-content] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Deshabilitar atributos title nativos en botones dentro del toolbar */
+.editor-toolbar-container button[title],
+.editor-toolbar-container [title] {
+  /* Usar un pseudo-elemento vacío para sobrescribir el tooltip nativo */
+  position: relative;
+}
+
+.editor-toolbar-container button[title]:hover::before,
+.editor-toolbar-container [title]:hover::before {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Esconder específicamente los tooltips de Radix UI que no sean nuestros */
+.editor-toolbar-container > div:not([data-radix-tooltip-provider]) [data-radix-tooltip-content] {
+  display: none !important;
+}
+
+/* Asegurar que solo nuestros tooltips custom se muestren */
+.editor-toolbar-container .toolbar-tooltip-trigger [data-radix-tooltip-content] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Enfoque agresivo: ocultar TODOS los tooltips excepto los del ToolbarTooltip */
+.editor-toolbar-container [data-radix-tooltip-content]:not(.toolbar-tooltip-content) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: -999 !important;
+}
+
+/* Asegurar que los tooltips del toolbar se muestren correctamente */
+.editor-toolbar-container .toolbar-tooltip-content {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  z-index: 9999 !important;
+}
+
+/* Remover título nativo específicamente para botones problemáticos */
+.editor-toolbar-container .color-button[title] {
+  /* Usar CSS para remover el comportamiento del title */
+}
+
+.editor-toolbar-container .color-button[title]:hover::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Wrapper para tooltip triggers sin refs */
+.editor-toolbar-container .toolbar-tooltip-trigger > div {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Asegurar que los tooltips funcionen con el wrapper */
+.editor-toolbar-container .toolbar-tooltip-trigger {
+  display: inline-flex !important;
+}

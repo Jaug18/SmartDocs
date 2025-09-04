@@ -1,0 +1,221 @@
+/* LinkButton Component Styles */
+.link-button,
+.link-toggle {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.link-button:hover:not(:disabled),
+.link-toggle:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+/* Active state for toggle */
+.link-toggle--active,
+.link-toggle[data-state="on"] {
+  @apply bg-accent text-accent-foreground;
+  @apply text-blue-600 dark:text-blue-400;
+}
+
+/* Active state for button */
+.link-button.bg-accent {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  @apply text-blue-600 dark:text-blue-400;
+}
+
+/* Link Dropdown Styles */
+.link-dropdown-content {
+  @apply w-52;
+  max-height: 50vh !important;
+  overflow-y: auto !important;
+  z-index: 999 !important;
+  position: fixed !important;
+}
+
+.link-dropdown-label {
+  @apply font-medium text-sm px-2 py-1.5;
+  @apply border-b border-border;
+}
+
+.link-dropdown-item {
+  @apply cursor-pointer transition-colors;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply flex items-center gap-2;
+  min-height: 2.5rem;
+}
+
+.link-dropdown-item:hover {
+  @apply transform scale-[1.02];
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.link-dropdown-item:focus {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.link-dropdown-item.text-destructive:hover {
+  @apply bg-destructive text-destructive-foreground;
+}
+
+/* Icon styling within dropdown items */
+.link-dropdown-item svg {
+  @apply w-4 h-4 flex-shrink-0;
+}
+
+/* URL Input Styling */
+.link-url-input {
+  @apply transition-all duration-200;
+}
+
+.link-url-input:focus {
+  @apply ring-2 ring-blue-500/30 border-blue-500;
+}
+
+/* Target Select Styling */
+.link-target-select {
+  @apply transition-all duration-200;
+}
+
+.link-target-select:focus {
+  @apply ring-2 ring-blue-500/30 border-blue-500;
+}
+
+/* Tooltip Styles */
+.link-tooltip {
+  @apply text-center;
+}
+
+.link-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.link-tooltip__shortcut {
+  @apply text-xs text-muted-foreground;
+}
+
+.link-tooltip__url {
+  @apply text-xs text-blue-600 dark:text-blue-400 mt-1;
+  @apply truncate max-w-xs;
+}
+
+.link-tooltip kbd {
+  @apply inline-flex items-center justify-center rounded border border-border bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .link-button,
+  .link-toggle {
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .link-dropdown-content {
+    @apply w-48;
+  }
+}
+
+/* Enhanced Link text styles for TipTap editor */
+.tiptap a {
+  @apply text-blue-600 dark:text-blue-400;
+  @apply underline decoration-blue-600 dark:decoration-blue-400;
+  @apply transition-all duration-150;
+  @apply cursor-pointer;
+  text-decoration-style: solid;
+  text-underline-offset: 2px;
+}
+
+.tiptap a:hover {
+  @apply text-blue-700 dark:text-blue-300;
+  @apply decoration-blue-700 dark:decoration-blue-300;
+  @apply shadow-sm;
+  text-decoration-style: wavy;
+  transform: translateY(-1px);
+}
+
+.tiptap a:focus {
+  @apply outline-2 outline-blue-500/50 outline-offset-1;
+  @apply rounded;
+}
+
+.tiptap a:visited {
+  @apply text-purple-600 dark:text-purple-400;
+  @apply decoration-purple-600 dark:decoration-purple-400;
+}
+
+/* External link indicator */
+.tiptap a[target="_blank"]::after {
+  content: '↗';
+  @apply text-xs text-muted-foreground;
+  @apply ml-1;
+  font-size: 0.75em;
+  vertical-align: super;
+}
+
+/* Dark mode enhancements */
+.dark .link-button,
+.dark .link-toggle {
+  @apply hover:bg-gray-800;
+}
+
+.dark .link-dropdown-content {
+  @apply border-gray-600;
+}
+
+/* Accessibility improvements */
+.link-button:focus-visible,
+.link-toggle:focus-visible {
+  @apply ring-2 ring-blue-500/50 ring-offset-2;
+}
+
+/* Animation for link text application */
+@keyframes link-apply {
+  0% {
+    color: inherit;
+    text-decoration: none;
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+    color: #3b82f6;
+  }
+  100% {
+    color: #3b82f6;
+    text-decoration: underline;
+    transform: scale(1);
+  }
+}
+
+.tiptap a.new-link {
+  animation: link-apply 0.3s ease-out forwards;
+}
+
+/* Link validation states */
+.link-url-input.invalid {
+  @apply border-destructive ring-destructive/30;
+}
+
+.link-url-input.valid {
+  @apply border-green-500 ring-green-500/30;
+}
+
+/* Link preview in tooltip */
+.link-tooltip__url {
+  word-break: break-all;
+  max-width: 200px;
+}
+
+/* Dropdown item truncation */
+.link-dropdown-item .truncate {
+  max-width: 140px;
+}

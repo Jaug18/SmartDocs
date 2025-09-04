@@ -1,0 +1,293 @@
+/* ImageButton Component Styles */
+.image-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.image-button:hover {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+.image-dropdown-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.image-dropdown-button:hover {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+.image-dropdown-button[data-state="open"] {
+  @apply bg-green-100 dark:bg-green-900/30;
+  @apply border-green-200 dark:border-green-800;
+  @apply text-green-700 dark:text-green-300;
+  @apply shadow-sm;
+}
+
+/* Tooltip Styles */
+.image-tooltip {
+  @apply text-center;
+}
+
+.image-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.image-tooltip__shortcut {
+  @apply text-xs text-gray-500 dark:text-gray-400;
+  @apply bg-gray-100 dark:bg-gray-800;
+  @apply px-2 py-1 rounded;
+  @apply font-mono;
+}
+
+/* Dropdown Content Styles */
+.image-dropdown-content {
+  @apply w-48;
+  @apply bg-white dark:bg-gray-900;
+  @apply border border-gray-200 dark:border-gray-700;
+  @apply rounded-lg shadow-lg;
+  @apply p-2;
+  max-height: 50vh !important;
+  overflow-y: auto !important;
+  z-index: 999 !important;
+  position: fixed !important;
+}
+
+.image-dropdown-label {
+  @apply font-semibold text-sm text-gray-700 dark:text-gray-300;
+  @apply px-2 py-1;
+}
+
+.image-dropdown-item {
+  @apply flex items-center;
+  @apply p-2 rounded-md;
+  @apply cursor-pointer;
+  @apply transition-all duration-150;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus:bg-gray-100 dark:focus:bg-gray-800;
+  @apply focus:outline-none;
+}
+
+.image-dropdown-item:focus {
+  @apply ring-2 ring-green-500 ring-offset-1;
+}
+
+/* Dialog Styles */
+.image-dialog {
+  @apply max-w-md;
+}
+
+.image-form {
+  @apply space-y-4 py-4;
+}
+
+.image-form__field {
+  @apply space-y-2;
+}
+
+.image-input {
+  @apply w-full;
+}
+
+.image-dialog__footer {
+  @apply flex justify-end space-x-2;
+}
+
+/* Image Element Styles in Editor */
+.ProseMirror img {
+  @apply max-w-full h-auto;
+  @apply rounded-lg;
+  @apply my-4;
+  @apply cursor-pointer;
+  @apply transition-all duration-200;
+  @apply border border-transparent;
+}
+
+.ProseMirror img:hover {
+  @apply shadow-lg;
+  @apply border-gray-200 dark:border-gray-700;
+  transform: scale(1.02);
+}
+
+.ProseMirror img.ProseMirror-selectednode {
+  @apply ring-2 ring-green-500 ring-offset-2;
+  @apply border-green-300 dark:border-green-600;
+  @apply shadow-lg;
+}
+
+/* Image resize handles */
+.ProseMirror img.ProseMirror-selectednode::after {
+  @apply absolute;
+  @apply bottom-0 right-0;
+  @apply w-3 h-3;
+  @apply bg-green-500;
+  @apply rounded-full;
+  @apply cursor-se-resize;
+  content: '';
+}
+
+/* Image loading placeholder */
+.ProseMirror img[src=""] {
+  @apply bg-gray-100 dark:bg-gray-800;
+  @apply border-2 border-dashed border-gray-300 dark:border-gray-600;
+  @apply rounded-lg;
+  @apply min-h-32;
+  @apply flex items-center justify-center;
+}
+
+.ProseMirror img[src=""]:before {
+  content: "Cargando imagen...";
+  @apply text-gray-500 dark:text-gray-400;
+  @apply text-sm;
+}
+
+/* Figure wrapper for images with captions */
+.ProseMirror figure {
+  @apply my-6;
+  @apply text-center;
+}
+
+.ProseMirror figure img {
+  @apply mx-auto;
+  @apply my-0;
+}
+
+.ProseMirror figcaption {
+  @apply text-sm text-gray-600 dark:text-gray-400;
+  @apply mt-2;
+  @apply italic;
+}
+
+/* Dark mode adjustments */
+.dark .image-button {
+  @apply text-gray-200;
+}
+
+.dark .image-button:hover {
+  @apply text-white;
+}
+
+.dark .image-dropdown-button {
+  @apply text-gray-200;
+}
+
+.dark .image-dropdown-button:hover {
+  @apply text-white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .image-button {
+    @apply text-xs;
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .image-dropdown-button {
+    @apply text-xs;
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .image-dropdown-content {
+    @apply w-44;
+  }
+  
+  .image-dialog {
+    @apply max-w-sm mx-4;
+  }
+  
+  .ProseMirror img {
+    @apply max-w-full;
+  }
+}
+
+/* Animation for image insertion */
+@keyframes image-insert {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.ProseMirror img {
+  animation: image-insert 0.3s ease-in-out;
+}
+
+/* Error state for broken images */
+.ProseMirror img[alt]:after {
+  @apply absolute top-0 left-0 right-0 bottom-0;
+  @apply bg-gray-100 dark:bg-gray-800;
+  @apply border border-gray-300 dark:border-gray-600;
+  @apply rounded-lg;
+  @apply flex items-center justify-center;
+  @apply text-gray-500 dark:text-gray-400;
+  @apply text-sm;
+  content: "Error al cargar: " attr(alt);
+  display: none;
+}
+
+.ProseMirror img[src=""]:after,
+.ProseMirror img:not([src]):after {
+  display: flex;
+}
+
+/* TipTap Editor Image Styles - Based on Official Examples */
+.tiptap img {
+  display: block;
+  height: auto;
+  margin: 1.5rem 0;
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease-in-out;
+}
+
+.tiptap img:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.tiptap img.ProseMirror-selectednode {
+  outline: 3px solid #7c3aed;
+  outline-offset: 2px;
+  @apply shadow-lg;
+  @apply ring-4 ring-purple-500/20;
+}
+
+/* Drag cursor for images */
+.tiptap .ProseMirror-dropcursor {
+  @apply border-l-2 border-purple-500;
+  @apply h-6;
+  @apply animate-pulse;
+}
+
+/* Image loading states */
+.tiptap img[data-loading] {
+  @apply opacity-50;
+  @apply animate-pulse;
+}
+
+.tiptap img[data-error] {
+  @apply border-2 border-red-300;
+  @apply bg-red-50;
+  @apply p-4;
+}

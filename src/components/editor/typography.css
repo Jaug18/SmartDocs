@@ -1,0 +1,52 @@
+/* Typography Button Styles */
+.typography-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.typography-button:hover {
+  background-color: hsl(var(--muted));
+}
+
+.typography-button.bg-muted {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Typography enhancement styles for the editor */
+.ProseMirror {
+  /* Ensure proper rendering of typographic characters */
+  font-feature-settings: "liga" 1, "kern" 1;
+  font-variant-ligatures: common-ligatures;
+}
+
+/* Special styling for typographic replacements */
+.ProseMirror .typography-symbol {
+  color: hsl(var(--primary));
+  font-weight: 500;
+}
+
+/* Enhanced quote styles */
+.ProseMirror blockquote {
+  quotes: "«" "»" "‹" "›";
+}
+
+.ProseMirror blockquote::before {
+  content: open-quote;
+}
+
+.ProseMirror blockquote::after {
+  content: close-quote;
+}
+
+/* Tooltip content styling for typography info */
+.typography-tooltip {
+  max-width: 200px;
+}
+
+.typography-tooltip .font-medium {
+  color: hsl(var(--foreground));
+}
+
+.typography-tooltip .text-muted-foreground {
+  color: hsl(var(--muted-foreground));
+}

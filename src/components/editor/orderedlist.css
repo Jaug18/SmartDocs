@@ -1,0 +1,128 @@
+/* OrderedListButton Component Styles */
+.ordered-list-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.ordered-list-button:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+.ordered-list-button--active {
+  @apply bg-orange-100 dark:bg-orange-900/30;
+  @apply border-orange-200 dark:border-orange-800;
+  @apply text-orange-700 dark:text-orange-300;
+  @apply shadow-sm;
+}
+
+.ordered-list-toggle {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.ordered-list-toggle:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+.ordered-list-toggle--active {
+  @apply bg-orange-100 dark:bg-orange-900/30;
+  @apply border-orange-200 dark:border-orange-800;
+  @apply text-orange-700 dark:text-orange-300;
+  @apply shadow-sm;
+}
+
+.ordered-list-toggle[data-state="on"] {
+  @apply bg-orange-100 dark:bg-orange-900/30;
+  @apply border-orange-200 dark:border-orange-800;
+  @apply text-orange-700 dark:text-orange-300;
+  @apply shadow-sm;
+}
+
+/* Tooltip Styles */
+.ordered-list-tooltip {
+  @apply text-center;
+}
+
+.ordered-list-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.ordered-list-tooltip__shortcut {
+  @apply text-xs text-muted-foreground;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .ordered-list-button,
+  .ordered-list-toggle {
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+/* TipTap Editor OrderedList Styles - Based on Official Examples */
+.tiptap ol {
+  padding: 0 1rem;
+  margin: 1.25rem 1rem 1.25rem 0.4rem;
+  list-style: decimal;
+}
+
+.tiptap ol li {
+  margin: 0.25em 0;
+  padding-left: 0.25rem;
+}
+
+.tiptap ol li p {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+/* Custom start numbers */
+.tiptap ol[start] {
+  counter-reset: list-counter calc(attr(start) - 1);
+}
+
+.tiptap ol li {
+  counter-increment: list-counter;
+}
+
+/* Nested ordered lists */
+.tiptap ol ol {
+  margin: 0.5rem 0 0.5rem 1rem;
+  padding: 0 0 0 1rem;
+  list-style: lower-alpha;
+}
+
+.tiptap ol ol ol {
+  list-style: lower-roman;
+}
+
+/* Selection styling */
+.tiptap ol li.ProseMirror-selectednode {
+  @apply outline outline-2 outline-orange-500 outline-offset-2;
+  @apply bg-orange-50 dark:bg-orange-900/20;
+  @apply rounded;
+}
+
+/* Dark mode adjustments */
+.dark .tiptap ol {
+  @apply text-gray-100;
+}
+
+.dark .tiptap ol li::marker {
+  @apply text-orange-400;
+}

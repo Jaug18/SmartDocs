@@ -1,0 +1,175 @@
+/* Color Button Styles */
+.color-button {
+  position: relative;
+  padding: 0.25rem;
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+}
+
+.color-button.is-active {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.color-button-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.color-indicator {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 3px;
+  border-radius: 1px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Dropdown Content */
+.color-dropdown-content {
+  width: 280px;
+  padding: 0.75rem;
+}
+
+/* Custom Color Section */
+.custom-color-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.custom-color-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+}
+
+.custom-color-input {
+  width: 2.5rem;
+  height: 2rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.375rem;
+  cursor: pointer;
+  background: none;
+  transition: all 0.2s ease;
+}
+
+.custom-color-input:hover {
+  border-color: hsl(var(--primary));
+}
+
+/* Preset Colors Section */
+.preset-colors-section {
+  margin: 0.5rem 0;
+}
+
+.preset-colors-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+  margin-bottom: 0.5rem;
+}
+
+.preset-colors-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.25rem;
+}
+
+.preset-color-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preset-color-item:hover {
+  background-color: hsl(var(--accent));
+}
+
+.preset-color-swatch {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.preset-color-swatch.is-selected {
+  border-color: hsl(var(--primary));
+  transform: scale(1.1);
+}
+
+/* Unset Color */
+.unset-color-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.unset-color-item:hover {
+  background-color: hsl(var(--accent));
+}
+
+.unset-color-swatch {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 2px solid hsl(var(--border));
+  background: linear-gradient(
+    45deg,
+    transparent 40%,
+    hsl(var(--destructive)) 40%,
+    hsl(var(--destructive)) 60%,
+    transparent 60%
+  );
+  position: relative;
+}
+
+.unset-color-swatch::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  width: 70%;
+  height: 2px;
+  background-color: hsl(var(--destructive));
+}
+
+/* Dark mode adjustments */
+.dark .color-indicator {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark .custom-color-input {
+  border-color: hsl(var(--border));
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .color-dropdown-content {
+    width: 240px;
+  }
+  
+  .preset-colors-grid {
+    grid-template-columns: 1fr;
+  }
+}

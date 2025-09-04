@@ -1,0 +1,165 @@
+/* HardBreakButton Component Styles */
+.hard-break-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.hard-break-button:hover {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+.hard-break-button:active {
+  @apply bg-green-100 dark:bg-green-900/30;
+  @apply border-green-200 dark:border-green-800;
+  @apply text-green-700 dark:text-green-300;
+  @apply shadow-sm;
+  transform: translateY(0);
+}
+
+.hard-break-button:disabled {
+  @apply bg-gray-50 dark:bg-gray-900;
+  @apply text-gray-400 dark:text-gray-600;
+  @apply border-gray-200 dark:border-gray-800;
+  @apply cursor-not-allowed;
+  transform: none;
+}
+
+/* Tooltip Styles */
+.hard-break-tooltip {
+  @apply text-center;
+}
+
+.hard-break-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.hard-break-tooltip__description {
+  @apply text-xs text-gray-600 dark:text-gray-400 mb-2;
+  @apply max-w-48;
+}
+
+.hard-break-tooltip__shortcut {
+  @apply text-xs text-gray-500 dark:text-gray-400;
+  @apply bg-gray-100 dark:bg-gray-800;
+  @apply px-2 py-1 rounded;
+  @apply font-mono;
+}
+
+/* Hard Break Element Styles in Editor */
+.ProseMirror br {
+  @apply block;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+}
+
+.ProseMirror br.my-hard-break {
+  @apply relative;
+  @apply border-l-2 border-transparent;
+  @apply transition-all duration-200;
+}
+
+.ProseMirror br.my-hard-break:hover {
+  @apply border-l-green-300 dark:border-l-green-600;
+}
+
+.ProseMirror br.my-hard-break::after {
+  content: "";
+  @apply absolute left-0 top-0;
+  @apply w-2 h-2;
+  @apply bg-green-300 dark:bg-green-600;
+  @apply rounded-full;
+  @apply opacity-0;
+  @apply transition-opacity duration-200;
+  @apply pointer-events-none;
+  transform: translateX(-50%) translateY(-25%);
+}
+
+.ProseMirror br.my-hard-break:hover::after {
+  @apply opacity-100;
+}
+
+/* Visual indicator for hard breaks in editor */
+.ProseMirror .hard-break-indicator {
+  @apply inline-block w-2 h-2;
+  @apply bg-green-300 dark:bg-green-600;
+  @apply rounded-full;
+  @apply opacity-30;
+  @apply ml-1;
+  @apply transition-opacity duration-200;
+}
+
+.ProseMirror .hard-break-indicator:hover {
+  @apply opacity-70;
+}
+
+/* Animation for hard break insertion */
+@keyframes hard-break-insert {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.ProseMirror br.my-hard-break.just-inserted {
+  animation: hard-break-insert 0.3s ease-out;
+}
+
+/* Focus states for better accessibility */
+.ProseMirror br.my-hard-break:focus {
+  @apply outline-none;
+  @apply border-l-green-500 dark:border-l-green-400;
+  @apply shadow-sm;
+}
+
+/* Dark mode adjustments */
+.dark .hard-break-button {
+  @apply text-gray-200;
+}
+
+.dark .hard-break-button:hover {
+  @apply text-white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hard-break-button {
+    @apply text-xs;
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .hard-break-tooltip__description {
+    @apply max-w-40 text-xs;
+  }
+}
+
+/* Special styling for keyboard shortcut display */
+.hard-break-tooltip__shortcut {
+  @apply flex items-center gap-1;
+}
+
+.hard-break-tooltip__shortcut::before {
+  content: "⇧";
+  @apply text-xs;
+}
+
+.hard-break-tooltip__shortcut::after {
+  content: "↵";
+  @apply text-xs;
+}

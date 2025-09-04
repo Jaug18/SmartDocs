@@ -1,0 +1,134 @@
+/* StrikeButton Component Styles */
+.strike-button,
+.strike-toggle {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.strike-button:hover:not(:disabled),
+.strike-toggle:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+/* Active state for toggle */
+.strike-toggle--active,
+.strike-toggle[data-state="on"] {
+  @apply bg-accent text-accent-foreground;
+  text-decoration: line-through;
+}
+
+/* Active state for button */
+.strike-button.bg-accent {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  text-decoration: line-through;
+}
+
+/* Tooltip Styles */
+.strike-tooltip {
+  @apply text-center;
+}
+
+.strike-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.strike-tooltip__shortcut {
+  @apply text-xs text-muted-foreground;
+}
+
+.strike-tooltip kbd {
+  @apply inline-flex items-center justify-center rounded border border-border bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .strike-button,
+  .strike-toggle {
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+/* Enhanced Strike text styles for TipTap editor */
+.tiptap s,
+.tiptap del,
+.tiptap strike {
+  text-decoration: line-through;
+  text-decoration-style: solid;
+  text-decoration-color: currentColor;
+  @apply transition-all duration-150;
+  @apply opacity-75;
+}
+
+.tiptap s:hover,
+.tiptap del:hover,
+.tiptap strike:hover {
+  @apply opacity-90;
+  text-decoration-style: double;
+  @apply text-red-600 dark:text-red-400;
+}
+
+.tiptap s:focus,
+.tiptap del:focus,
+.tiptap strike:focus {
+  @apply outline-2 outline-red-500/50 outline-offset-1;
+  @apply rounded;
+}
+
+/* Dark mode enhancements */
+.dark .strike-button,
+.dark .strike-toggle {
+  @apply hover:bg-gray-800;
+}
+
+/* Accessibility improvements */
+.strike-button:focus-visible,
+.strike-toggle:focus-visible {
+  @apply ring-2 ring-red-500/50 ring-offset-2;
+}
+
+/* Animation for strike text application */
+@keyframes strike-apply {
+  0% {
+    text-decoration: none;
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    text-decoration: line-through;
+    transform: scale(1);
+    opacity: 0.75;
+  }
+}
+
+.tiptap s.new-strike,
+.tiptap del.new-strike,
+.tiptap strike.new-strike {
+  animation: strike-apply 0.3s ease-out forwards;
+}
+
+/* Different strike styles for different elements */
+.tiptap s {
+  text-decoration-style: solid;
+}
+
+.tiptap del {
+  text-decoration-style: solid;
+  @apply text-red-700 dark:text-red-300;
+}
+
+.tiptap strike {
+  text-decoration-style: solid;
+}

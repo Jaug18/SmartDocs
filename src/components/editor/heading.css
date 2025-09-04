@@ -1,0 +1,293 @@
+/* HeadingButton Component Styles */
+.heading-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.heading-button:hover {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+.heading-button--active {
+  @apply bg-indigo-100 dark:bg-indigo-900/30;
+  @apply border-indigo-200 dark:border-indigo-800;
+  @apply text-indigo-700 dark:text-indigo-300;
+  @apply shadow-sm;
+}
+
+.heading-button--active:hover {
+  @apply bg-indigo-200 dark:bg-indigo-800/40;
+}
+
+/* Specific level colors */
+.heading-button--level-1.heading-button--active {
+  @apply bg-red-100 dark:bg-red-900/30;
+  @apply border-red-200 dark:border-red-800;
+  @apply text-red-700 dark:text-red-300;
+}
+
+.heading-button--level-2.heading-button--active {
+  @apply bg-orange-100 dark:bg-orange-900/30;
+  @apply border-orange-200 dark:border-orange-800;
+  @apply text-orange-700 dark:text-orange-300;
+}
+
+.heading-button--level-3.heading-button--active {
+  @apply bg-yellow-100 dark:bg-yellow-900/30;
+  @apply border-yellow-200 dark:border-yellow-800;
+  @apply text-yellow-700 dark:text-yellow-300;
+}
+
+.heading-button--level-4.heading-button--active {
+  @apply bg-green-100 dark:bg-green-900/30;
+  @apply border-green-200 dark:border-green-800;
+  @apply text-green-700 dark:text-green-300;
+}
+
+.heading-button--level-5.heading-button--active {
+  @apply bg-blue-100 dark:bg-blue-900/30;
+  @apply border-blue-200 dark:border-blue-800;
+  @apply text-blue-700 dark:text-blue-300;
+}
+
+.heading-button--level-6.heading-button--active {
+  @apply bg-purple-100 dark:bg-purple-900/30;
+  @apply border-purple-200 dark:border-purple-800;
+  @apply text-purple-700 dark:text-purple-300;
+}
+
+/* Dropdown Button Styles */
+.heading-dropdown-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.heading-dropdown-button:hover {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+.heading-dropdown-button--active {
+  @apply bg-indigo-100 dark:bg-indigo-900/30;
+  @apply border-indigo-200 dark:border-indigo-800;
+  @apply text-indigo-700 dark:text-indigo-300;
+  @apply shadow-sm;
+}
+
+.heading-dropdown-button[data-state="open"] {
+  @apply bg-indigo-100 dark:bg-indigo-900/30;
+  @apply border-indigo-200 dark:border-indigo-800;
+  @apply text-indigo-700 dark:text-indigo-300;
+  @apply shadow-sm;
+}
+
+/* Tooltip Styles */
+.heading-tooltip {
+  @apply text-center;
+}
+
+.heading-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.heading-tooltip__shortcut {
+  @apply text-xs text-gray-500 dark:text-gray-400;
+  @apply bg-gray-100 dark:bg-gray-800;
+  @apply px-2 py-1 rounded;
+  @apply font-mono;
+}
+
+/* Dropdown Content Styles */
+.heading-dropdown-content {
+  @apply w-64;
+  @apply bg-white dark:bg-gray-900;
+  @apply border border-gray-200 dark:border-gray-700;
+  @apply rounded-lg shadow-lg;
+  @apply p-2;
+  max-height: 50vh !important;
+  overflow-y: auto !important;
+  z-index: 999 !important;
+  position: fixed !important;
+}
+
+.heading-dropdown-label {
+  @apply font-semibold text-sm text-gray-700 dark:text-gray-300;
+  @apply px-2 py-1;
+}
+
+/* Heading Item Styles */
+.heading-item {
+  @apply flex items-center;
+  @apply p-2 rounded-md;
+  @apply cursor-pointer;
+  @apply transition-all duration-150;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus:bg-gray-100 dark:focus:bg-gray-800;
+  @apply focus:outline-none;
+}
+
+.heading-item:focus {
+  @apply ring-2 ring-indigo-500 ring-offset-1;
+}
+
+.heading-item--active {
+  @apply bg-indigo-100 dark:bg-indigo-900/30;
+  @apply text-indigo-700 dark:text-indigo-300;
+}
+
+.heading-item__text {
+  @apply flex flex-col flex-1;
+}
+
+.heading-item__label {
+  @apply font-medium;
+  @apply leading-tight;
+}
+
+.heading-item__shortcut {
+  @apply text-xs text-gray-500 dark:text-gray-400;
+  @apply font-mono;
+  @apply mt-0.5;
+}
+
+.heading-item--active .heading-item__shortcut {
+  @apply text-indigo-600 dark:text-indigo-400;
+}
+
+/* Heading Element Styles in Editor */
+.ProseMirror h1 {
+  @apply text-3xl font-bold;
+  @apply mt-8 mb-4;
+  @apply text-gray-900 dark:text-gray-100;
+  @apply leading-tight;
+}
+
+.ProseMirror h2 {
+  @apply text-2xl font-bold;
+  @apply mt-6 mb-3;
+  @apply text-gray-900 dark:text-gray-100;
+  @apply leading-tight;
+}
+
+.ProseMirror h3 {
+  @apply text-xl font-semibold;
+  @apply mt-5 mb-2;
+  @apply text-gray-900 dark:text-gray-100;
+  @apply leading-tight;
+}
+
+.ProseMirror h4 {
+  @apply text-lg font-semibold;
+  @apply mt-4 mb-2;
+  @apply text-gray-900 dark:text-gray-100;
+  @apply leading-tight;
+}
+
+.ProseMirror h5 {
+  @apply text-base font-semibold;
+  @apply mt-3 mb-1;
+  @apply text-gray-900 dark:text-gray-100;
+  @apply leading-tight;
+}
+
+.ProseMirror h6 {
+  @apply text-sm font-semibold;
+  @apply mt-2 mb-1;
+  @apply text-gray-900 dark:text-gray-100;
+  @apply leading-tight;
+  @apply uppercase tracking-wide;
+}
+
+/* Focus states for headings */
+.ProseMirror h1:focus,
+.ProseMirror h2:focus,
+.ProseMirror h3:focus,
+.ProseMirror h4:focus,
+.ProseMirror h5:focus,
+.ProseMirror h6:focus {
+  @apply outline-none;
+  @apply ring-2 ring-indigo-500 ring-offset-2;
+  @apply rounded;
+}
+
+/* Dark mode adjustments */
+.dark .heading-button {
+  @apply text-gray-200;
+}
+
+.dark .heading-button:hover {
+  @apply text-white;
+}
+
+.dark .heading-dropdown-button {
+  @apply text-gray-200;
+}
+
+.dark .heading-dropdown-button:hover {
+  @apply text-white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .heading-button {
+    @apply text-xs;
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .heading-dropdown-button {
+    @apply text-xs;
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .heading-dropdown-content {
+    @apply w-56;
+  }
+  
+  .ProseMirror h1 {
+    @apply text-2xl;
+  }
+  
+  .ProseMirror h2 {
+    @apply text-xl;
+  }
+  
+  .ProseMirror h3 {
+    @apply text-lg;
+  }
+}
+
+/* Animation for heading changes */
+@keyframes heading-change {
+  0% {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3,
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+  animation: heading-change 0.2s ease-in-out;
+}

@@ -1,0 +1,32 @@
+services:
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:latest
+    container_name: smartdocs_postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: smartdocs
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: smartdocs_pgadmin
+    ports:
+      - "8080:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@smartdocs.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+    name: smartdocs_postgres_data
+  pgadmin_data:
+    name: smartdocs_pgadmin_data

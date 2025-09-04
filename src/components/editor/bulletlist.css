@@ -1,0 +1,71 @@
+/* BulletList styles for TipTap editor */
+.tiptap :first-child {
+  margin-top: 0;
+}
+
+/* List styles */
+.tiptap ul, 
+.tiptap ol {
+  padding: 0 1rem;
+  margin: 1.25rem 1rem 1.25rem 0.4rem;
+}
+
+.tiptap ul li,
+.tiptap ol li {
+  margin: 0.25rem 0;
+  padding: 0;
+}
+
+.tiptap ul li p,
+.tiptap ol li p {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+/* Nested list styles */
+.tiptap ul ul,
+.tiptap ol ol,
+.tiptap ul ol,
+.tiptap ol ul {
+  margin: 0.5rem 0;
+}
+
+/* Bullet list specific styles */
+.tiptap ul {
+  list-style-type: disc;
+}
+
+.tiptap ul ul {
+  list-style-type: circle;
+}
+
+.tiptap ul ul ul {
+  list-style-type: square;
+}
+
+/* List item spacing */
+.tiptap li {
+  line-height: 1.6;
+}
+
+.tiptap li:first-child {
+  margin-top: 0;
+}
+
+.tiptap li:last-child {
+  margin-bottom: 0;
+}
+
+/* Focus styles for list items */
+.tiptap li p:focus {
+  outline: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tiptap ul, 
+  .tiptap ol {
+    padding: 0 0.75rem;
+    margin: 1rem 0.75rem 1rem 0.25rem;
+  }
+}

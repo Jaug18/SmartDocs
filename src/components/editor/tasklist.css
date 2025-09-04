@@ -1,0 +1,267 @@
+/* TaskListButton Component Styles */
+.tasklist-button {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply transition-all duration-200 ease-in-out;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+  @apply border border-transparent;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.tasklist-button:hover:not(:disabled) {
+  @apply shadow-sm;
+  transform: translateY(-1px);
+}
+
+/* Active state */
+.tasklist-button.bg-accent {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Toggle variant */
+.tasklist-toggle {
+  @apply data-[state=on]:bg-accent data-[state=on]:text-accent-foreground;
+}
+
+/* Task List Dropdown Styles */
+.tasklist-dropdown-content {
+  @apply w-52;
+  max-height: 50vh !important;
+  overflow-y: auto !important;
+  z-index: 999 !important;
+  position: fixed !important;
+}
+
+.tasklist-dropdown-label {
+  @apply font-medium text-sm px-2 py-1.5;
+  @apply border-b border-border;
+}
+
+.tasklist-dropdown-item {
+  @apply cursor-pointer transition-colors;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply flex items-center gap-2;
+}
+
+.tasklist-dropdown-item:hover {
+  @apply transform scale-[1.02];
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.tasklist-dropdown-item:focus {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Icon styling within dropdown items */
+.tasklist-dropdown-item svg {
+  @apply w-4 h-4 flex-shrink-0;
+}
+
+/* Tooltip Styles */
+.tasklist-tooltip {
+  @apply text-center;
+}
+
+.tasklist-tooltip__title {
+  @apply font-medium text-sm mb-1;
+}
+
+.tasklist-tooltip__shortcut {
+  @apply text-xs text-muted-foreground;
+}
+
+.tasklist-tooltip kbd {
+  @apply inline-flex items-center justify-center rounded border border-border bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .tasklist-button,
+  .tasklist-toggle {
+    min-width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .tasklist-dropdown-content {
+    @apply w-48;
+  }
+}
+
+/* Enhanced TaskList styles for TipTap editor */
+.tiptap ul[data-type="taskList"] {
+  @apply list-none ml-0 p-0;
+  margin: 1rem 0;
+}
+
+.tiptap ul[data-type="taskList"] li {
+  @apply flex items-start gap-2;
+  margin: 0.25rem 0;
+  padding: 0.25rem 0;
+  @apply transition-all duration-200;
+  min-height: 1.5rem;
+}
+
+.tiptap ul[data-type="taskList"] li:hover {
+  @apply bg-gray-50 dark:bg-gray-800/30;
+  @apply rounded-md px-2 py-1;
+  margin: 0.25rem -0.5rem;
+  @apply shadow-sm;
+}
+
+.tiptap ul[data-type="taskList"] li > label {
+  @apply flex-shrink-0 mt-0.5;
+  @apply select-none cursor-pointer;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+  min-width: 1rem;
+}
+
+.tiptap ul[data-type="taskList"] li > div {
+  @apply flex-1;
+  min-width: 0;
+  line-height: 1.5;
+}
+
+.tiptap ul[data-type="taskList"] input[type="checkbox"] {
+  @apply cursor-pointer;
+  @apply w-4 h-4;
+  @apply accent-emerald-500;
+  @apply transition-all duration-200;
+  margin: 0;
+  border-radius: 3px;
+  border: 2px solid hsl(var(--border));
+}
+
+.tiptap ul[data-type="taskList"] input[type="checkbox"]:hover {
+  @apply scale-110;
+  border-color: hsl(var(--primary));
+}
+
+.tiptap ul[data-type="taskList"] input[type="checkbox"]:checked {
+  @apply accent-emerald-600;
+  background-color: hsl(var(--primary));
+  border-color: hsl(var(--primary));
+}
+
+.tiptap ul[data-type="taskList"] input[type="checkbox"]:focus {
+  @apply outline-2 outline-emerald-500/50 outline-offset-1;
+  @apply ring-2 ring-emerald-500/30;
+}
+
+/* Nested task lists */
+.tiptap ul[data-type="taskList"] ul[data-type="taskList"] {
+  margin: 0.5rem 0 0.5rem 1rem;
+  @apply border-l-2 border-gray-200 dark:border-gray-700;
+  @apply pl-4;
+  position: relative;
+}
+
+.tiptap ul[data-type="taskList"] ul[data-type="taskList"]::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, 
+    hsl(var(--primary)) 0%, 
+    hsl(var(--primary) / 0.3) 100%);
+}
+
+/* Completed task styling */
+.tiptap ul[data-type="taskList"] li[data-checked="true"] > div {
+  @apply text-gray-500 dark:text-gray-400;
+  @apply line-through;
+  opacity: 0.7;
+}
+
+.tiptap ul[data-type="taskList"] li[data-checked="true"] {
+  @apply opacity-75;
+}
+
+.tiptap ul[data-type="taskList"] li[data-checked="true"]:hover {
+  @apply opacity-90;
+}
+
+/* Task list animations */
+@keyframes task-check {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.tiptap ul[data-type="taskList"] input[type="checkbox"]:checked {
+  animation: task-check 0.3s ease-in-out;
+}
+
+@keyframes task-complete {
+  0% { 
+    opacity: 1; 
+    transform: translateX(0);
+  }
+  50% { 
+    opacity: 0.5; 
+    transform: translateX(5px);
+  }
+  100% { 
+    opacity: 0.7; 
+    transform: translateX(0);
+  }
+}
+
+.tiptap ul[data-type="taskList"] li[data-checked="true"] > div {
+  animation: task-complete 0.4s ease-in-out;
+}
+
+/* Focus states for accessibility */
+.tiptap ul[data-type="taskList"] li:focus-within {
+  @apply outline-2 outline-emerald-500/30 outline-dashed outline-offset-2;
+  @apply rounded-md;
+  background: hsl(var(--accent) / 0.3);
+}
+
+/* Improved spacing for content */
+.tiptap ul[data-type="taskList"] li p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.tiptap ul[data-type="taskList"] li p:first-child {
+  margin-top: 0;
+}
+
+.tiptap ul[data-type="taskList"] li p:last-child {
+  margin-bottom: 0;
+}
+
+/* Dark mode enhancements */
+.dark .tasklist-button {
+  @apply hover:bg-gray-800;
+}
+
+.dark .tasklist-dropdown-content {
+  @apply border-gray-600;
+}
+
+.dark .tiptap ul[data-type="taskList"] li:hover {
+  @apply bg-gray-800/50;
+}
+
+/* Task priority indicators (optional enhancement) */
+.tiptap ul[data-type="taskList"] li[data-priority="high"] {
+  @apply border-l-4 border-red-500 pl-2;
+}
+
+.tiptap ul[data-type="taskList"] li[data-priority="medium"] {
+  @apply border-l-4 border-yellow-500 pl-2;
+}
+
+.tiptap ul[data-type="taskList"] li[data-priority="low"] {
+  @apply border-l-4 border-green-500 pl-2;
+}
