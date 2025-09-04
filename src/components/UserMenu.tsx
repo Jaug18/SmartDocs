@@ -59,14 +59,28 @@ export const UserMenu = () => {
         <Button variant="ghost" className="relative h-9 w-9 rounded-full">
           <Avatar className="h-9 w-9 border border-primary/10">
             {user.imageUrl ? (
-              <AvatarImage 
-                src={user.imageUrl.startsWith('http') ? user.imageUrl : `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}${user.imageUrl}`} 
-                alt={fullName}
-                onError={(e) => {
-                  console.error('Error loading profile image:', user.imageUrl);
-                  e.currentTarget.style.display = 'none';
-                }}
-              />
+              <>
+                <AvatarImage 
+                  src={user.imageUrl.startsWith('http') ? user.imageUrl : `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}${user.imageUrl}`} 
+                  alt={fullName}
+                  onError={(e) => {
+                    console.error('Error loading profile image:', user.imageUrl);
+                    // En lugar de ocultar, mostrar fallback
+                    const parent = e.currentTarget.parentElement;
+                    if (parent) {
+                      e.currentTarget.style.display = 'none';
+                      const fallback = parent.querySelector('.avatar-fallback');
+                      if (fallback) (fallback as HTMLElement).style.display = 'flex';
+                    }
+                  }}
+                />
+                <AvatarFallback 
+                  className="bg-primary/10 text-primary avatar-fallback" 
+                  style={{ display: 'none' }}
+                >
+                  {userInitials || <UserIcon className="h-4 w-4" />}
+                </AvatarFallback>
+              </>
             ) : (
               <AvatarFallback className="bg-primary/10 text-primary">
                 {userInitials || <UserIcon className="h-4 w-4" />}

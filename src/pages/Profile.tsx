@@ -457,23 +457,51 @@ const Profile: React.FC = () => {
                     {previewImage ? (
                       <AvatarImage src={previewImage} alt={userProfile.firstName} />
                     ) : userProfile.imageUrl ? (
-                      <AvatarImage 
-                        src={userProfile.imageUrl.startsWith('http') ? userProfile.imageUrl : `${API_BASE_URL}${userProfile.imageUrl}`} 
-                        alt={userProfile.firstName}
-                        onError={(e) => {
-                          console.error('Error loading profile image:', userProfile.imageUrl);
-                          e.currentTarget.style.display = 'none';
-                        }}
-                      />
+                      <>
+                        <AvatarImage 
+                          src={userProfile.imageUrl.startsWith('http') ? userProfile.imageUrl : `${API_BASE_URL}${userProfile.imageUrl}`} 
+                          alt={userProfile.firstName}
+                          onError={(e) => {
+                            console.error('Error loading profile image:', userProfile.imageUrl);
+                            // En lugar de ocultar, mostrar fallback
+                            const parent = e.currentTarget.parentElement;
+                            if (parent) {
+                              e.currentTarget.style.display = 'none';
+                              const fallback = parent.querySelector('.avatar-fallback');
+                              if (fallback) (fallback as HTMLElement).style.display = 'flex';
+                            }
+                          }}
+                        />
+                        <AvatarFallback 
+                          className="bg-primary/10 text-primary text-xl avatar-fallback" 
+                          style={{ display: 'none' }}
+                        >
+                          {userInitials || <User className="h-8 w-8" />}
+                        </AvatarFallback>
+                      </>
                     ) : user?.imageUrl ? (
-                      <AvatarImage 
-                        src={user.imageUrl.startsWith('http') ? user.imageUrl : `${API_BASE_URL}${user.imageUrl}`} 
-                        alt={userProfile.firstName}
-                        onError={(e) => {
-                          console.error('Error loading profile image:', user.imageUrl);
-                          e.currentTarget.style.display = 'none';
-                        }}
-                      />
+                      <>
+                        <AvatarImage 
+                          src={user.imageUrl.startsWith('http') ? user.imageUrl : `${API_BASE_URL}${user.imageUrl}`} 
+                          alt={userProfile.firstName}
+                          onError={(e) => {
+                            console.error('Error loading profile image:', user.imageUrl);
+                            // En lugar de ocultar, mostrar fallback
+                            const parent = e.currentTarget.parentElement;
+                            if (parent) {
+                              e.currentTarget.style.display = 'none';
+                              const fallback = parent.querySelector('.avatar-fallback');
+                              if (fallback) (fallback as HTMLElement).style.display = 'flex';
+                            }
+                          }}
+                        />
+                        <AvatarFallback 
+                          className="bg-primary/10 text-primary text-xl avatar-fallback" 
+                          style={{ display: 'none' }}
+                        >
+                          {userInitials || <User className="h-8 w-8" />}
+                        </AvatarFallback>
+                      </>
                     ) : (
                       <AvatarFallback className="bg-primary/10 text-primary text-xl">
                         {userInitials || <User className="h-8 w-8" />}
