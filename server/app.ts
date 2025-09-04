@@ -17,21 +17,10 @@ import aiRoutes from './routes/AIGPT41Nano';
 // Crear aplicación Express
 const app = express();
 
-// Configurar CORS - Configuración permisiva para debugging
+// Configurar CORS - Configuración completamente permisiva para Netlify
 app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  const allowedOrigins = [
-    'http://localhost:8001',
-    'http://localhost:3000', 
-    'http://localhost:5173',
-    'https://smartdocs1.netlify.app'
-  ];
-
-  // Si no hay origin o está en la lista permitida
-  if (!origin || allowedOrigins.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin || '*');
-  }
-
+  // Permitir TODOS los orígenes temporalmente
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS,PATCH');
   res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-Requested-With,Accept,Origin');
