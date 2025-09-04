@@ -17,6 +17,21 @@ import aiRoutes from './routes/AIGPT41Nano';
 // Crear aplicación Express
 const app = express();
 
+// Crear carpetas uploads si no existen
+import fs from 'fs';
+const uploadsPath = path.join(__dirname, 'uploads');
+const profilesPath = path.join(uploadsPath, 'profiles');
+
+if (!fs.existsSync(uploadsPath)) {
+  fs.mkdirSync(uploadsPath, { recursive: true });
+  console.log('📁 Created uploads directory:', uploadsPath);
+}
+
+if (!fs.existsSync(profilesPath)) {
+  fs.mkdirSync(profilesPath, { recursive: true });
+  console.log('📁 Created profiles directory:', profilesPath);
+}
+
 // Configurar CORS - Configuración específica para credentials
 app.use((req, res, next) => {
   const origin = req.headers.origin;
